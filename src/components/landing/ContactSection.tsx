@@ -41,16 +41,23 @@ const ContactSection = () => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      await fetch("https://functions.poehali.dev/e1f880aa-21dc-4645-a6c4-4499e41434b6", {
+      const res = await fetch("https://functions.poehali.dev/e1f880aa-21dc-4645-a6c4-4499e41434b6", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
-      setIsSubmitted(true);
-      setTimeout(() => {
-        setIsSubmitted(false);
-        setFormData({ name: "", email: "", message: "" });
-      }, 3000);
+      const data = await res.json();
+      if (data.ok) {
+        setIsSubmitted(true);
+        setTimeout(() => {
+          setIsSubmitted(false);
+          setFormData({ name: "", email: "", message: "" });
+        }, 3000);
+      } else {
+        alert("Ошибка отправки: " + JSON.stringify(data));
+      }
+    } catch (err) {
+      alert("Ошибка соединения: " + String(err));
     } finally {
       setIsSubmitting(false);
     }
