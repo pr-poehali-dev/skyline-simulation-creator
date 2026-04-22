@@ -56,15 +56,16 @@ const AboutSection = () => {
             <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/0 rounded-3xl transform -rotate-6"></div>
             <div className="w-full aspect-square rounded-3xl relative z-10 overflow-hidden">
               <img
-                src="https://cdn.poehali.dev/projects/fae007b7-7e60-4256-9806-87e49c645681/files/05466376-e698-499c-8a22-c15744f7e9f0.jpg"
-                alt="Ведущий мероприятий"
-                className="w-full h-full object-cover"
+                src="https://cdn.poehali.dev/projects/fae007b7-7e60-4256-9806-87e49c645681/bucket/15925843-fd60-4a2c-a48e-0d9212831e0c.jpg"
+                alt="Антон Маратканов — ведущий мероприятий"
+                className="w-full h-full object-cover object-top"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             </div>
           </div>
           <div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">Обо мне</h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-2 text-white">Антон Маратканов</h2>
+            <p className="text-zinc-400 text-lg mb-6">Ведущий мероприятий</p>
             <p className="text-lg mb-6 text-zinc-300">
               Я — профессиональный ведущий мероприятий с 8-летним опытом. Провожу свадьбы,
               корпоративы, юбилеи и детские праздники. Каждое мероприятие — уникальная история,

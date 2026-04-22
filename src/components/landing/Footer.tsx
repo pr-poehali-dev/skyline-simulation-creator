@@ -1,35 +1,30 @@
-import { Youtube, Instagram } from "lucide-react";
-import Icon from "@/components/ui/icon";
+import { Instagram, Phone } from "lucide-react";
 
 const Footer = () => {
   return (
     <footer className="bg-black py-8 border-t border-white/10">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          <p className="text-zinc-400 mb-4 md:mb-0">
-            &copy; {new Date().getFullYear()} Ведущий мероприятий. Все права защищены.
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-zinc-400">
+            &copy; {new Date().getFullYear()} Антон Маратканов — ведущий мероприятий
           </p>
-          <div className="flex space-x-4">
+          <div className="flex items-center space-x-6">
             <a
-              href="#"
-              className="text-zinc-400 hover:text-white transition-colors"
-              aria-label="YouTube"
+              href="tel:+79141983629"
+              className="flex items-center gap-2 text-zinc-400 hover:text-white transition-colors"
             >
-              <Youtube />
+              <Phone size={18} />
+              <span>+7 (914) 198-36-29</span>
             </a>
             <a
-              href="#"
-              className="text-zinc-400 hover:text-white transition-colors"
+              href="https://instagram.com/maratkanovevent"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-zinc-400 hover:text-white transition-colors"
               aria-label="Instagram"
             >
-              <Instagram />
-            </a>
-            <a
-              href="#"
-              className="text-zinc-400 hover:text-white transition-colors"
-              aria-label="VK"
-            >
-              <Icon name="MessageCircle" size={24} />
+              <Instagram size={20} />
+              <span>maratkanovevent</span>
             </a>
           </div>
         </div>

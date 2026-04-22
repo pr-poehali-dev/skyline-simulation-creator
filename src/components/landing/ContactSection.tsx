@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Loader2, Send, CheckCircle } from "lucide-react";
+import { Loader2, Send, CheckCircle, Phone, Instagram } from "lucide-react";
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -63,9 +63,27 @@ const ContactSection = () => {
         }`}
       >
         <h2 className="text-5xl font-bold mb-4 text-center text-zinc-200">Обсудим ваш праздник?</h2>
-        <p className="text-center text-zinc-400 mb-10 text-lg">
+        <p className="text-center text-zinc-400 mb-6 text-lg">
           Оставьте заявку — я свяжусь с вами в течение часа
         </p>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
+          <a
+            href="tel:+79141983629"
+            className="flex items-center gap-2 text-white bg-white/10 hover:bg-white/20 border border-white/20 px-5 py-3 rounded-full transition-colors"
+          >
+            <Phone size={18} />
+            <span>+7 (914) 198-36-29</span>
+          </a>
+          <a
+            href="https://instagram.com/maratkanovevent"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-white bg-white/10 hover:bg-white/20 border border-white/20 px-5 py-3 rounded-full transition-colors"
+          >
+            <Instagram size={18} />
+            <span>@maratkanovevent</span>
+          </a>
+        </div>
         <div
           className={`max-w-md mx-auto bg-black/50 backdrop-blur-lg rounded-lg p-8 shadow-2xl border border-white/10 transition-all duration-500 delay-200 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"

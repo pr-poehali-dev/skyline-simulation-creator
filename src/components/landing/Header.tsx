@@ -29,8 +29,8 @@ const Header = () => {
       }`}
     >
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        <a href="/" className="text-3xl font-bold tracking-tighter text-white">
-          Ведущий
+        <a href="/" className="text-2xl font-bold tracking-tighter text-white">
+          Антон Маратканов
         </a>
         <div className="md:hidden">
           <Button
