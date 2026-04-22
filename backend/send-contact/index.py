@@ -35,8 +35,8 @@ def handler(event: dict, context) -> dict:
             'body': json.dumps({'error': 'Заполните обязательные поля'})
         }
 
-    token = os.environ.get('TELEGRAM_BOT_TOKEN', '8213786675:AAFJ86VzSsru7hFuukSAzob3Q57863zDkoA')
-    chat_id = os.environ.get('TELEGRAM_CHAT_ID', '1953598356')
+    token = os.environ.get('TELEGRAM_BOT_TOKEN', '')
+    chat_id = os.environ.get('TELEGRAM_CHAT_ID', '')
 
     text = (
         f"\U0001f3a4 Новая заявка с сайта!\n\n"
