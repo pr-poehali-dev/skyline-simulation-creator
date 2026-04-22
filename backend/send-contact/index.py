@@ -41,7 +41,7 @@ def handler(event: dict, context) -> dict:
     text = (
         f"\U0001f3a4 Новая заявка с сайта!\n\n"
         f"Имя: {name}\n"
-        f"Контакт: {contact}\n"
+        f"Телефон / email: {contact}\n"
         f"Сообщение: {message if message else '-'}"
     )
 
