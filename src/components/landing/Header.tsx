@@ -30,7 +30,7 @@ const Header = () => {
     >
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <a href="/" className="text-3xl font-bold tracking-tighter text-white">
-          SoundForge
+          Ведущий
         </a>
         <div className="md:hidden">
           <Button
@@ -53,7 +53,7 @@ const Header = () => {
                 onClick={() => scrollToSection("licenses")}
                 className="text-white hover:text-purple-400 transition-colors"
               >
-                Лицензии
+                Услуги
               </button>
             </li>
             <li>
@@ -77,11 +77,9 @@ const Header = () => {
         <Button
           variant="outline"
           className="hidden md:block border-white/20 text-white hover:bg-white/10"
-          asChild
+          onClick={() => scrollToSection("contact")}
         >
-          <a href="#" target="_blank" rel="noopener noreferrer">
-            BeatStars
-          </a>
+          Заказать мероприятие
         </Button>
       </div>
     </header>

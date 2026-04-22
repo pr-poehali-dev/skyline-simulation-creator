@@ -1,4 +1,5 @@
-import { Youtube, Instagram, Music2 } from "lucide-react";
+import { Youtube, Instagram } from "lucide-react";
+import Icon from "@/components/ui/icon";
 
 const Footer = () => {
   return (
@@ -6,7 +7,7 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <p className="text-zinc-400 mb-4 md:mb-0">
-            &copy; {new Date().getFullYear()} SoundForge. Все права защищены.
+            &copy; {new Date().getFullYear()} Ведущий мероприятий. Все права защищены.
           </p>
           <div className="flex space-x-4">
             <a
@@ -26,9 +27,9 @@ const Footer = () => {
             <a
               href="#"
               className="text-zinc-400 hover:text-white transition-colors"
-              aria-label="BeatStars"
+              aria-label="VK"
             >
-              <Music2 />
+              <Icon name="MessageCircle" size={24} />
             </a>
           </div>
         </div>

@@ -1,71 +1,69 @@
 import { useState, useRef, useEffect } from "react";
-import { Check, X, Crown, Zap, Star, Globe } from "lucide-react";
+import { Check, Crown, Zap, Star, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
-interface LicenseOption {
+interface ServiceOption {
   name: string;
   price: string;
   icon: React.ReactNode;
   features: string[];
-  notIncluded?: string[];
-  bulkDeal?: string;
+  badge?: string;
   popular?: boolean;
 }
 
-const licenseOptions: LicenseOption[] = [
+const serviceOptions: ServiceOption[] = [
   {
-    name: "Стандартная лицензия",
-    price: "299 руб",
+    name: "День рождения",
+    price: "от 15 000 ₽",
     icon: <Star className="w-6 h-6" />,
     features: [
-      "Использование для записи музыки",
-      "Распространение до 5 000 копий",
-      "75 000 онлайн-прослушиваний",
-      "1 музыкальный клип",
-      "Коммерческие выступления",
-      "Радиотрансляция (2 станции)",
+      "Ведение до 4 часов",
+      "Сценарий под ваш запрос",
+      "Конкурсы и игры для гостей",
+      "Тосты и поздравления",
+      "Музыкальное сопровождение",
     ],
-    bulkDeal: "КУПИ 1 ТРЕК — ПОЛУЧИ 1 В ПОДАРОК!",
+    badge: "ОСТАВЬ ЗАЯВКУ — ПОЛУЧИ СКИДКУ 10%!",
   },
   {
-    name: "Продвинутая лицензия",
-    price: "499 руб",
+    name: "Корпоратив",
+    price: "от 25 000 ₽",
     icon: <Zap className="w-6 h-6" />,
     features: [
-      "Использование для записи музыки",
-      "Распространение до 10 000 копий",
-      "150 000 онлайн-прослушиваний",
-      "1 музыкальный клип",
-      "Коммерческие выступления",
-      "Радиотрансляция (без ограничений)",
+      "Ведение до 6 часов",
+      "Командные игры и активности",
+      "Награждение сотрудников",
+      "Фуршет-блок и тематические конкурсы",
+      "Профессиональное оборудование",
+      "Фотозона с реквизитом",
     ],
     popular: true,
   },
   {
-    name: "Премиум лицензия",
-    price: "799 руб",
+    name: "Свадьба",
+    price: "от 35 000 ₽",
     icon: <Crown className="w-6 h-6" />,
     features: [
-      "Использование для записи музыки",
-      "Распространение до 20 000 копий",
-      "500 000 онлайн-прослушиваний",
-      "1 музыкальный клип",
-      "Только некоммерческие выступления",
+      "Ведение на весь день",
+      "Выездная регистрация",
+      "Индивидуальный сценарий",
+      "Свадебные конкурсы",
+      "Координация тостов",
+      "Работа с DJ и фотографом",
     ],
-    notIncluded: ["Без прав на радиотрансляцию"],
   },
   {
-    name: "Коммерческая лицензия",
-    price: "899 руб",
-    icon: <Globe className="w-6 h-6" />,
+    name: "VIP / Юбилей",
+    price: "от 50 000 ₽",
+    icon: <Sparkles className="w-6 h-6" />,
     features: [
-      "Использование для записи музыки",
-      "Неограниченное распространение",
-      "Неограниченные онлайн-прослушивания",
-      "Неограниченное количество клипов",
-      "Коммерческие выступления",
-      "Радиотрансляция (без ограничений)",
+      "Ведение без ограничений по времени",
+      "Эксклюзивный авторский сценарий",
+      "Живые артисты по запросу",
+      "Видеоролик-поздравление",
+      "Персональный помощник",
+      "Организация шоу-программы",
     ],
   },
 ];
@@ -92,6 +90,11 @@ const LicenseSection = () => {
     return () => observer.disconnect();
   }, []);
 
+  const scrollToContact = () => {
+    const element = document.getElementById("contact");
+    if (element) element.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <section ref={ref} id="licenses" className="py-20 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-black via-zinc-900/20 to-black"></div>
@@ -102,15 +105,14 @@ const LicenseSection = () => {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
           }`}
         >
-          <h2 className="text-5xl md:text-6xl font-bold mb-6 text-white">Выбери свою лицензию</h2>
+          <h2 className="text-5xl md:text-6xl font-bold mb-6 text-white">Пакеты услуг</h2>
           <p className="text-xl text-zinc-400 max-w-2xl mx-auto">
-            Подбери идеальную лицензию под свои потребности и начни создавать потрясающую музыку уже
-            сегодня
+            Выберите формат мероприятия — я подберу программу и сделаю ваш праздник незабываемым
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {licenseOptions.map((option, index) => (
+          {serviceOptions.map((option, index) => (
             <div
               key={option.name}
               className={`transition-all duration-500 ${
@@ -154,30 +156,22 @@ const LicenseSection = () => {
                           <span className="text-sm text-zinc-300">{feature}</span>
                         </li>
                       ))}
-                      {option.notIncluded?.map((feature, i) => (
-                        <li key={i} className="flex items-start text-zinc-500">
-                          <X className="h-5 w-5 text-zinc-500 mr-2 shrink-0 mt-0.5" />
-                          <span className="text-sm">{feature}</span>
-                        </li>
-                      ))}
                     </ul>
                   </div>
 
-                  {option.bulkDeal && (
+                  {option.badge && (
                     <div className="mb-4">
                       <p className="text-sm font-semibold text-white bg-white/5 py-2 px-3 rounded-lg border border-white/10 animate-pulse">
-                        {option.bulkDeal}
+                        {option.badge}
                       </p>
                     </div>
                   )}
 
                   <Button
                     className="w-full bg-white text-black hover:bg-zinc-200 transition-colors"
-                    asChild
+                    onClick={scrollToContact}
                   >
-                    <a href="#" target="_blank" rel="noopener noreferrer">
-                      Выбрать
-                    </a>
+                    Заказать
                   </Button>
                 </CardContent>
               </Card>
