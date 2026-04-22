@@ -2,7 +2,7 @@ import { useRef, useEffect, useState } from "react";
 import Icon from "@/components/ui/icon";
 
 const achievements = [
-  { icon: "CalendarCheck", label: "Лет на сцене", value: "8+" },
+  { icon: "CalendarCheck", label: "Лет на сцене", value: "10+" },
   { icon: "PartyPopper", label: "Мероприятий проведено", value: "300+" },
   { icon: "Users", label: "Довольных гостей", value: "15 000+" },
   { icon: "Trophy", label: "Форматов событий", value: "10+" },
@@ -67,8 +67,8 @@ const AboutSection = () => {
             <h2 className="text-4xl md:text-5xl font-bold mb-2 text-white">Антон Маратканов</h2>
             <p className="text-zinc-400 text-lg mb-6">Ведущий мероприятий</p>
             <p className="text-lg mb-6 text-zinc-300">
-              Я — профессиональный ведущий мероприятий с 8-летним опытом. Провожу свадьбы,
-              корпоративы, юбилеи и детские праздники. Каждое мероприятие — уникальная история,
+              Я — профессиональный ведущий мероприятий с опытом более 10 лет. Провожу свадьбы,
+              корпоративы, дни рождения и выпускные. Каждое мероприятие — уникальная история,
               которую мы создаём вместе с вами.
             </p>
             <p className="text-lg mb-8 text-zinc-300">

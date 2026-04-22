@@ -24,7 +24,7 @@ const HeroSection = () => {
   const stats = [
     { icon: "PartyPopper", label: "Мероприятий проведено", value: "300+" },
     { icon: "Users", label: "Довольных гостей", value: "15 000+" },
-    { icon: "CalendarCheck", label: "Лет на сцене", value: "8+" },
+    { icon: "CalendarCheck", label: "Лет на сцене", value: "10+" },
     { icon: "Trophy", label: "Форматов событий", value: "10+" },
   ];
 
@@ -47,11 +47,11 @@ const HeroSection = () => {
           <div className="text-center mb-16 animate-fade-in">
             <h1 className="text-6xl md:text-8xl font-bold mb-6 tracking-tight relative">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-zinc-500">
-                Ваш праздник — моя сцена
+                Ваше событие — моя работа
               </span>
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-zinc-400 max-w-3xl mx-auto">
-              Профессиональный ведущий мероприятий: свадьбы, корпоративы, дни рождения и юбилеи.
+              Более 10 лет с микрофоном на сцене: свадьбы, корпоративы, дни рождения и выпускные.
               Создаю атмосферу, которую помнят долгие годы.
             </p>
             <div className="relative inline-block">
