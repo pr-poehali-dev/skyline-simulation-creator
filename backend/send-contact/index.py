@@ -2,6 +2,7 @@ import json
 import os
 import urllib.request
 import urllib.parse
+from datetime import datetime, timezone, timedelta
 
 
 def handler(event: dict, context) -> dict:
@@ -38,11 +39,14 @@ def handler(event: dict, context) -> dict:
     token = os.environ.get('TELEGRAM_BOT_TOKEN', '')
     chat_id = os.environ.get('TELEGRAM_CHAT_ID', '')
 
+    now = datetime.now(timezone(timedelta(hours=10))).strftime("%d.%m.%Y %H:%M")
+
     text = (
         f"\U0001f3a4 Новая заявка с сайта!\n\n"
         f"Имя: {name}\n"
         f"Телефон / email: {contact}\n"
-        f"Сообщение: {message if message else '-'}"
+        f"Сообщение: {message if message else '-'}\n\n"
+        f"\U0001f554 {now} (Владивосток)"
     )
 
     url = f"https://api.telegram.org/bot{token}/sendMessage"
