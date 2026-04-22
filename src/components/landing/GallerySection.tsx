@@ -2,7 +2,22 @@ import { useRef, useEffect, useState } from "react";
 import { ImageIcon } from "lucide-react";
 
 const photos: { src: string; alt: string }[] = [
-  // Добавьте сюда ссылки на ваши фото
+  { src: "https://cdn.poehali.dev/files/652e6b99-4490-44f9-952c-fb7464a804e7.jpg", alt: "Мероприятие" },
+  { src: "https://cdn.poehali.dev/files/e921b973-5969-4f94-a527-c1068dc57993.jpg", alt: "Мероприятие" },
+  { src: "https://cdn.poehali.dev/files/92e61055-9078-409f-9d82-b670e295a34f.jpg", alt: "Мероприятие" },
+  { src: "https://cdn.poehali.dev/files/655a22f3-aed3-4bd3-a70b-7183586a84fa.jpg", alt: "Мероприятие" },
+  { src: "https://cdn.poehali.dev/files/198004c2-8366-4691-8dba-994db1a6542c.jpg", alt: "Мероприятие" },
+  { src: "https://cdn.poehali.dev/files/08dd8483-dd13-444f-83db-63f1e469ce32.jpg", alt: "Мероприятие" },
+  { src: "https://cdn.poehali.dev/files/bdf52998-098d-4ea2-858e-06990ec0bcbc.jpg", alt: "Мероприятие" },
+  { src: "https://cdn.poehali.dev/files/eb70eb0a-4f2e-43ce-9c82-00b5c32c6197.jpg", alt: "Мероприятие" },
+  { src: "https://cdn.poehali.dev/files/ca3efbcb-b4a9-44e3-b0ad-08d5ce418878.jpg", alt: "Мероприятие" },
+  { src: "https://cdn.poehali.dev/files/196ed2f4-c47a-4ee6-b5c8-c36a979f5f7b.jpg", alt: "Мероприятие" },
+  { src: "https://cdn.poehali.dev/files/41574164-77bd-41d0-89ab-b18f5a9b9c4e.jpg", alt: "Мероприятие" },
+  { src: "https://cdn.poehali.dev/files/854d5be4-4451-4f5f-86e6-2fafff95646c.jpg", alt: "Мероприятие" },
+  { src: "https://cdn.poehali.dev/files/629c5fe5-63cd-46ad-a94f-fec5b6a4b575.jpg", alt: "Мероприятие" },
+  { src: "https://cdn.poehali.dev/files/d0985fda-6f5c-4117-aa80-1e04b32951f6.jpg", alt: "Мероприятие" },
+  { src: "https://cdn.poehali.dev/files/c2013472-d561-45eb-ba55-c5f3d4b4ea20.jpg", alt: "Мероприятие" },
+  { src: "https://cdn.poehali.dev/files/82313164-24c5-400c-b951-8680a083fde1.jpg", alt: "Мероприятие" },
 ];
 
 const GallerySection = () => {
