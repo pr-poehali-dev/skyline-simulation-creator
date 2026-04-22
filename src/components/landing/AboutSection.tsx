@@ -2,7 +2,7 @@ import { useRef, useEffect, useState } from "react";
 import Icon from "@/components/ui/icon";
 
 const achievements = [
-  { icon: "CalendarCheck", label: "Лет на сцене", value: "10+" },
+  { icon: "CalendarCheck", label: "Лет с микрофоном", value: "10+" },
   { icon: "PartyPopper", label: "Мероприятий проведено", value: "300+" },
   { icon: "Users", label: "Довольных гостей", value: "15 000+" },
   { icon: "Trophy", label: "Форматов событий", value: "10+" },
