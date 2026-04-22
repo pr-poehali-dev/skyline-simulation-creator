@@ -2,7 +2,6 @@ import json
 import os
 import urllib.request
 import urllib.parse
-# redeploy
 
 
 def handler(event: dict, context) -> dict:
@@ -20,7 +19,11 @@ def handler(event: dict, context) -> dict:
             'body': ''
         }
 
-    body = json.loads(event.get('body', '{}'))
+    try:
+        body = json.loads(event.get('body', '{}'))
+    except Exception:
+        body = {}
+
     name = body.get('name', '').strip()
     contact = body.get('email', '').strip()
     message = body.get('message', '').strip()
@@ -32,29 +35,35 @@ def handler(event: dict, context) -> dict:
             'body': json.dumps({'error': 'Заполните обязательные поля'})
         }
 
-    token = os.environ['TELEGRAM_BOT_TOKEN']
-    chat_id = os.environ['TELEGRAM_CHAT_ID']
+    token = os.environ.get('TELEGRAM_BOT_TOKEN', '8213786675:AAFJ86VzSsru7hFuukSAzob3Q57863zDkoA')
+    chat_id = os.environ.get('TELEGRAM_CHAT_ID', '1953598356')
 
     text = (
-        f"🎤 *Новая заявка с сайта!*\n\n"
-        f"👤 *Имя:* {name}\n"
-        f"📞 *Контакт:* {contact}\n"
-        f"📝 *Сообщение:* {message if message else '—'}"
+        f"\U0001f3a4 Новая заявка с сайта!\n\n"
+        f"Имя: {name}\n"
+        f"Контакт: {contact}\n"
+        f"Сообщение: {message if message else '-'}"
     )
 
     url = f"https://api.telegram.org/bot{token}/sendMessage"
     data = urllib.parse.urlencode({
         'chat_id': chat_id,
         'text': text,
-        'parse_mode': 'Markdown'
     }).encode()
 
     req = urllib.request.Request(url, data=data, method='POST')
-    with urllib.request.urlopen(req) as resp:
-        resp.read()
-
-    return {
-        'statusCode': 200,
-        'headers': {'Access-Control-Allow-Origin': '*'},
-        'body': json.dumps({'ok': True})
-    }
+    try:
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            result = json.loads(resp.read())
+        return {
+            'statusCode': 200,
+            'headers': {'Access-Control-Allow-Origin': '*'},
+            'body': json.dumps({'ok': True})
+        }
+    except urllib.error.HTTPError as e:
+        error_body = e.read().decode()
+        return {
+            'statusCode': 200,
+            'headers': {'Access-Control-Allow-Origin': '*'},
+            'body': json.dumps({'ok': False, 'tg_error': error_body, 'token_prefix': token[:15]})
+        }
