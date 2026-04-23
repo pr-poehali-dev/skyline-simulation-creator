@@ -208,32 +208,36 @@ const DjPage = () => {
             <div className="w-1 h-12 bg-purple-500 rounded-full" />
             <h2 className="text-4xl md:text-5xl font-black">Мои сеты</h2>
           </div>
-          <p className="text-gray-400 text-lg mb-12 ml-5">Скоро здесь появятся записи выступлений</p>
+          <p className="text-gray-400 text-lg mb-12 ml-5">Записи выступлений — слушать в ВКонтакте</p>
 
-          {/* Заглушки под сеты */}
           <div className="space-y-4">
-            {[1, 2, 3].map((i) => (
-              <div
-                key={i}
-                className="flex items-center gap-4 bg-white/5 border border-purple-500/20 rounded-2xl p-5"
+            {[
+              { href: "https://vk.com/audio48332695_456239404_3cdb75d91bf0ddb3d4", title: "Сет #1", label: "Открыть в ВК" },
+              { href: "https://vk.com/audio48332695_456239400_b5396d8693d4569679", title: "Сет #2", label: "Открыть в ВК" },
+              { href: "https://vk.com/audio48332695_456239395_9fb45f5c738f1dcb6d", title: "Сет #3", label: "Открыть в ВК" },
+              { href: "https://vk.com/audio48332695_456239354_bf2937f01bec603782", title: "Сет #4", label: "Открыть в ВК" },
+            ].map((item, i) => (
+              <a
+                key={item.href}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 bg-white/5 border border-purple-500/20 hover:border-purple-500/60 rounded-2xl p-5 transition-all group"
               >
                 <div className="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <Icon name="Music2" size={22} className="text-purple-400" />
+                  <span className="text-purple-400 font-black text-lg">{i + 1}</span>
                 </div>
                 <div className="flex-1">
-                  <div className="h-4 bg-white/10 rounded w-48 mb-2" />
-                  <div className="h-3 bg-white/5 rounded w-24" />
+                  <p className="font-bold group-hover:text-purple-400 transition-colors">{item.title}</p>
+                  <p className="text-gray-500 text-sm mt-0.5">DJ Puzyr'koff</p>
                 </div>
-                <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center">
-                  <Icon name="Play" size={16} className="text-gray-600 ml-0.5" />
+                <div className="flex items-center gap-2 text-[#0077FF] text-sm font-medium">
+                  <Icon name="ExternalLink" size={16} />
+                  <span className="hidden sm:inline">ВКонтакте</span>
                 </div>
-              </div>
+              </a>
             ))}
           </div>
-
-          <p className="text-center text-gray-600 text-sm mt-6">
-            Сеты появятся после загрузки на SoundCloud или YouTube
-          </p>
         </div>
       </section>
 
