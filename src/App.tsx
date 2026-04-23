@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import WildEast from "./pages/WildEast";
 import WildEastPartners from "./pages/WildEastPartners";
 import DjPage from "./pages/DjPage";
+import AdminReviews from "./pages/AdminReviews";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/wild-east" element={<WildEast />} />
           <Route path="/wild-east/partners" element={<WildEastPartners />} />
           <Route path="/dj" element={<DjPage />} />
+          <Route path="/admin/reviews" element={<AdminReviews />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

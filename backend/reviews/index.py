@@ -15,7 +15,7 @@ def handler(event: dict, context) -> dict:
 
     cors = {
         'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, PUT, OPTIONS',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
         'Access-Control-Allow-Headers': 'Content-Type, X-Admin-Key',
     }
 
@@ -114,6 +114,17 @@ def handler(event: dict, context) -> dict:
             review_id = int(body.get('id', 0))
             is_approved = bool(body.get('is_approved', False))
             cur.execute("UPDATE reviews SET is_approved = %s WHERE id = %s", (is_approved, review_id))
+            conn.commit()
+            return {'statusCode': 200, 'headers': cors, 'body': json.dumps({'ok': True})}
+
+        # DELETE — удалить отзыв
+        if method == 'DELETE':
+            admin_key = (event.get('headers') or {}).get('X-Admin-Key', '')
+            if admin_key != os.environ.get('ADMIN_KEY', ''):
+                return {'statusCode': 403, 'headers': cors, 'body': json.dumps({'ok': False, 'error': 'Forbidden'})}
+            body = json.loads(event.get('body', '{}'))
+            review_id = int(body.get('id', 0))
+            cur.execute("DELETE FROM reviews WHERE id = %s", (review_id,))
             conn.commit()
             return {'statusCode': 200, 'headers': cors, 'body': json.dumps({'ok': True})}
 
