@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 
@@ -79,6 +80,15 @@ const Header = () => {
               >
                 Контакты
               </button>
+            </li>
+            <li>
+              <Link
+                to="/wild-east"
+                className="text-orange-400 hover:text-orange-300 transition-colors font-medium"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                🐯 Дикий Восток
+              </Link>
             </li>
           </ul>
         </nav>
