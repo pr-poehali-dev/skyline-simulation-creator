@@ -90,6 +90,15 @@ const Header = () => {
                 🐯 Дикий Восток
               </Link>
             </li>
+            <li>
+              <Link
+                to="/dj"
+                className="text-purple-400 hover:text-purple-300 transition-colors font-medium"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                🎧 DJ Puzyr'koff
+              </Link>
+            </li>
           </ul>
         </nav>
         <Button

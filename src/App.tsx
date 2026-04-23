@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import WildEast from "./pages/WildEast";
 import WildEastPartners from "./pages/WildEastPartners";
+import DjPage from "./pages/DjPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -21,6 +22,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/wild-east" element={<WildEast />} />
           <Route path="/wild-east/partners" element={<WildEastPartners />} />
+          <Route path="/dj" element={<DjPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
