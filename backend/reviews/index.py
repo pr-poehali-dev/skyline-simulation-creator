@@ -95,7 +95,7 @@ def handler(event: dict, context) -> dict:
             chat_id = os.environ.get('TELEGRAM_CHAT_ID', '')
             if token and chat_id:
                 stars = '\u2b50' * rating
-                msg = f"\u2b50 Новый отзыв (ожидает модерации)\n\nАвтор: {author_name}\nТип события: {event_type or '-'}\nОценка: {stars}\nТекст: {text}\n\nID: {new_id}"
+                msg = f"\u2b50 Новый отзыв (ожидает модерации)\n\nАвтор: {author_name}\nТип события: {event_type or '-'}\nОценка: {stars}\nТекст: {text}\n\nID: {new_id}\n\n\U0001f517 Одобрить: https://eventkhv.ru/admin/reviews"
                 data = urllib.parse.urlencode({'chat_id': chat_id, 'text': msg}).encode()
                 req = urllib.request.Request(f"https://api.telegram.org/bot{token}/sendMessage", data=data, method='POST')
                 try:
