@@ -10,7 +10,7 @@ const photos = [
   "https://cdn.poehali.dev/files/932fc7f7-dd85-4977-93e6-66d72f1f2c20.jpg",
 ];
 
-const cities = ["Хабаровск", "Владивосток", "Находка", "Благовещенск"];
+const cities = ["Хабаровск", "Владивосток", "Находка", "Благовещенск", "и многие другие"];
 
 const DjPage = () => {
   const [isScrolled, setIsScrolled] = useState(false);
