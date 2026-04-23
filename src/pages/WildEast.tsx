@@ -219,7 +219,7 @@ const WildEast = () => {
             Общественно значимые события, которые объединяют Хабаровск
           </p>
 
-          <div className="grid md:grid-cols-2 gap-6 mb-16">
+          <div className="grid md:grid-cols-2 gap-6 mb-8">
             {[
               {
                 icon: "MapPin",
@@ -236,11 +236,6 @@ const WildEast = () => {
                 title: "Видеоотчёты",
                 desc: "Документируем важные события — чтобы ничего не было забыто",
               },
-              {
-                icon: "Heart",
-                title: "Сообщество",
-                desc: "Создаём пространство для людей, которым не всё равно, что происходит на Дальнем Востоке",
-              },
             ].map((item) => (
               <div
                 key={item.title}
@@ -253,6 +248,26 @@ const WildEast = () => {
                 <p className="text-gray-400">{item.desc}</p>
               </div>
             ))}
+
+            {/* Сообщество */}
+            <div className="bg-white/5 border border-orange-500/20 rounded-2xl p-6 hover:border-orange-500/50 transition-all flex flex-col justify-between">
+              <div>
+                <div className="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center mb-4">
+                  <Icon name="Heart" size={24} className="text-orange-400" />
+                </div>
+                <h3 className="text-xl font-bold mb-2">Сообщество</h3>
+                <p className="text-gray-400">Создаём пространство для людей, которым не всё равно, что происходит на Дальнем Востоке</p>
+              </div>
+              <a
+                href="https://vk.com/wild_east_khv"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex items-center gap-2 bg-[#0077FF] hover:bg-[#0066DD] text-white font-medium px-4 py-2 rounded-xl transition-colors text-sm w-fit"
+              >
+                <Icon name="ExternalLink" size={15} />
+                Подписаться в ВК
+              </a>
+            </div>
           </div>
 
           <div className="grid md:grid-cols-2 gap-4">
