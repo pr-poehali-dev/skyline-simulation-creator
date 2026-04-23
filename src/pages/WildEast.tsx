@@ -11,7 +11,7 @@ const WildEast = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const [form, setForm] = useState({ height: "", weight: "", base: "", exp: "", gym: "", age: "", contact: "" });
+  const [form, setForm] = useState({ name: "", height: "", weight: "", base: "", exp: "", gym: "", age: "", contact: "" });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
@@ -475,6 +475,17 @@ const WildEast = () => {
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="bg-white/5 border border-orange-500/20 rounded-2xl p-6 md:p-8 space-y-4">
+              <div>
+                <label className="text-gray-400 text-sm mb-1.5 block">Имя и фамилия *</label>
+                <Input
+                  placeholder="Иван Петров"
+                  value={form.name}
+                  onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
+                  required
+                  className="bg-white/5 border-white/10 text-white placeholder-gray-600 focus:border-orange-500/50"
+                />
+              </div>
+
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="text-gray-400 text-sm mb-1.5 block">Рост (см)</label>

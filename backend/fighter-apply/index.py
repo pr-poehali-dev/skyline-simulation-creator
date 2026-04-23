@@ -19,6 +19,7 @@ def handler(event: dict, context) -> dict:
 
     body = json.loads(event.get('body', '{}'))
 
+    name    = body.get('name', '').strip()
     height  = body.get('height', '').strip()
     weight  = body.get('weight', '').strip()
     base    = body.get('base', '').strip()
@@ -38,6 +39,7 @@ def handler(event: dict, context) -> dict:
 
     msg = (
         f"\U0001f94a Новая заявка бойца — Дикий Восток\n\n"
+        f"\U0001f464 Имя: {name or '—'}\n"
         f"\U0001f4cf Рост: {height or '—'} см\n"
         f"\u2696\ufe0f Вес: {weight or '—'} кг\n"
         f"\U0001f3af База: {base or '—'}\n"
