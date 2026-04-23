@@ -95,14 +95,23 @@ const DjPage = () => {
           <h1 className="text-5xl md:text-8xl font-black mb-4 leading-none tracking-tighter">
             DJ <span className="text-purple-500">Puzyr'koff</span>
           </h1>
-          <p className="text-lg md:text-xl text-gray-300 max-w-xl mx-auto mb-10">
+          <p className="text-lg md:text-xl text-gray-300 max-w-xl mx-auto mb-8">
             Клубный диджей с опытом выступлений от Находки до Благовещенска
           </p>
+
+          {/* Жанры */}
+          <div className="flex flex-wrap gap-2 justify-center mb-6">
+            {["Поп", "Реп", "Коммерческие ремиксы", "Техно", "Afro"].map((genre) => (
+              <span key={genre} className="text-xs px-3 py-1.5 bg-purple-500/15 border border-purple-500/40 text-purple-300 rounded-full font-medium">
+                {genre}
+              </span>
+            ))}
+          </div>
 
           {/* Города */}
           <div className="flex flex-wrap gap-2 justify-center mb-10">
             {cities.map((city) => (
-              <span key={city} className="text-xs px-3 py-1 border border-purple-500/40 text-purple-300 rounded-full">
+              <span key={city} className="text-xs px-3 py-1 border border-white/15 text-gray-400 rounded-full">
                 {city}
               </span>
             ))}
@@ -152,6 +161,11 @@ const DjPage = () => {
                   За эти годы я обучил десятки диджеев, которые сегодня работают
                   по всей России. Моя задача — дать тебе не просто технику,
                   а уверенность за пультом.
+                </p>
+                <p>
+                  Играю мультиформатно — от коммерческой попсы, репа и ремиксов
+                  до качественного техно и афро. Читаю зал и даю людям именно то,
+                  что им нужно в этот момент.
                 </p>
               </div>
 
