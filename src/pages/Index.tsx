@@ -5,6 +5,8 @@ import {
   LicenseSection,
   AboutSection,
   GallerySection,
+  BusinessCard,
+  ReviewsSection,
   ContactSection,
   Footer,
 } from "@/components/landing";
@@ -19,7 +21,9 @@ const Index = () => {
           <HeroSection />
           <LicenseSection />
           <AboutSection />
+          <BusinessCard />
           <GallerySection />
+          <ReviewsSection />
           <ContactSection />
         </main>
         <Footer />

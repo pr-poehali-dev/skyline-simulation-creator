@@ -1,0 +1,17 @@
+{
+  "tests": [
+    {
+      "name": "GET reviews (public)",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 200
+    },
+    {
+      "name": "POST review",
+      "method": "POST",
+      "path": "/",
+      "body": {"author_name": "Тест Тестов", "event_type": "Свадьба", "text": "Отличный ведущий!", "rating": 5},
+      "expectedStatus": 200
+    }
+  ]
+}
