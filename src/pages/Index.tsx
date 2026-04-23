@@ -5,7 +5,6 @@ import {
   LicenseSection,
   AboutSection,
   GallerySection,
-  BusinessCard,
   ReviewsSection,
   ContactSection,
   Footer,
@@ -21,7 +20,6 @@ const Index = () => {
           <HeroSection />
           <LicenseSection />
           <AboutSection />
-          <BusinessCard />
           <GallerySection />
           <ReviewsSection />
           <ContactSection />
