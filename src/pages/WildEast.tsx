@@ -177,7 +177,7 @@ const WildEast = () => {
 
           <div className="grid md:grid-cols-3 gap-4">
             {[
-              { href: "https://vk.ru/video/playlist/-230198930_1", icon: "Users", label: "Конференции", desc: "Видеозаписи городских форумов и конференций" },
+              { href: "https://vk.ru/video/playlist/-230198930_1", icon: "Users", label: "Конференции", desc: "Первые конференции перед боями" },
               { href: "https://vk.ru/video/playlist/-230198930_2", icon: "Swords", label: "Первые бои", desc: "Видеозаписи первых турниров" },
               { href: "https://vk.ru/video/playlist/-230198930_4", icon: "Play", label: "Все бои", desc: "Полный архив видео с боёв" },
               { href: "https://vk.com/albums-230198930", icon: "Camera", label: "Фотоотчёты", desc: "Фотографии с турниров" },
