@@ -341,6 +341,24 @@ const WildEast = () => {
               <p className="text-gray-400">Организуем бесплатные праздники для жителей разных районов Хабаровска — потому что радость должна быть доступна каждому.</p>
             </div>
           </div>
+
+          {/* Кнопка для партнёров */}
+          <div className="mt-10 flex justify-center">
+            <Link
+              to="/wild-east/partners"
+              target="_blank"
+              className="inline-flex items-center gap-3 bg-white/5 border border-orange-500/30 hover:border-orange-500/70 hover:bg-white/10 text-white rounded-2xl px-6 py-4 transition-all group"
+            >
+              <div className="w-10 h-10 bg-orange-500/20 rounded-xl flex items-center justify-center">
+                <Icon name="FileText" size={20} className="text-orange-400" />
+              </div>
+              <div className="text-left">
+                <div className="font-bold group-hover:text-orange-400 transition-colors">Информация для партнёров</div>
+                <div className="text-gray-500 text-sm">Открыть и сохранить как PDF</div>
+              </div>
+              <Icon name="ExternalLink" size={16} className="text-gray-600 group-hover:text-orange-400 transition-colors ml-2" />
+            </Link>
+          </div>
         </div>
       </section>
 
