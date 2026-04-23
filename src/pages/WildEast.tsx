@@ -177,6 +177,7 @@ const WildEast = () => {
 
           <div className="grid md:grid-cols-3 gap-4">
             {[
+              { href: "https://vk.ru/video/playlist/-230198930_1", icon: "Users", label: "Конференции", desc: "Видеозаписи городских форумов и конференций" },
               { href: "https://vk.ru/video/playlist/-230198930_2", icon: "Swords", label: "Первые бои", desc: "Видеозаписи первых турниров" },
               { href: "https://vk.ru/video/playlist/-230198930_4", icon: "Play", label: "Все бои", desc: "Полный архив видео с боёв" },
               { href: "https://vk.com/albums-230198930", icon: "Camera", label: "Фотоотчёты", desc: "Фотографии с турниров" },
@@ -257,7 +258,6 @@ const WildEast = () => {
           <div className="grid md:grid-cols-2 gap-4">
             {[
               { href: "https://vk.ru/video/playlist/-230198930_3", icon: "Mic2", label: "Подкасты", desc: "Разговоры о городе, спорте и людях Дальнего Востока" },
-              { href: "https://vk.ru/video/playlist/-230198930_1", icon: "Users", label: "Конференции", desc: "Видеозаписи городских форумов и конференций" },
             ].map((item) => (
               <a
                 key={item.label}
