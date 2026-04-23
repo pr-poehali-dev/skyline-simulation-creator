@@ -285,6 +285,43 @@ const WildEast = () => {
               </div>
             </a>
           </div>
+
+          {/* Видео с мероприятий */}
+          <div className="mt-6 grid md:grid-cols-2 gap-4">
+            {[
+              {
+                href: "https://vkvideo.ru/clip-230198930_456239121",
+                title: "Сила духа",
+                desc: "Мероприятие по интеграции ветеранов в мирную жизнь",
+                icon: "Shield",
+              },
+              {
+                href: "https://vkvideo.ru/video-230198930_456239119",
+                title: "Богатырская весна",
+                desc: "Проводы зимы и встреча весны с русскими традициями",
+                icon: "Sun",
+              },
+            ].map((item) => (
+              <a
+                key={item.title}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 bg-white/5 border border-orange-500/20 hover:border-orange-500/60 rounded-2xl p-5 transition-all group"
+              >
+                <div className="w-14 h-14 bg-orange-500/15 rounded-2xl flex items-center justify-center flex-shrink-0">
+                  <Icon name={item.icon} size={26} className="text-orange-400" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="font-bold group-hover:text-orange-400 transition-colors">{item.title}</p>
+                  <p className="text-gray-500 text-sm mt-0.5">{item.desc}</p>
+                </div>
+                <div className="flex items-center gap-1 text-orange-500/60 group-hover:text-orange-400 transition-colors flex-shrink-0">
+                  <Icon name="Play" size={16} />
+                </div>
+              </a>
+            ))}
+          </div>
         </div>
       </section>
 
