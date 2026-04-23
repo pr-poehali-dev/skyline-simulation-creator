@@ -220,29 +220,23 @@ const WildEast = () => {
           </p>
 
           <div className="grid md:grid-cols-2 gap-6 mb-8">
-            {[
-              {
-                icon: "MapPin",
-                title: "Городские события",
-                desc: "Организуем и освещаем общественно важные мероприятия города — от фестивалей до форумов",
-              },
-              {
-                icon: "Camera",
-                title: "Видеоотчёты",
-                desc: "Документируем важные события — чтобы ничего не было забыто",
-              },
-            ].map((item) => (
-              <div
-                key={item.title}
-                className="bg-white/5 border border-orange-500/20 rounded-2xl p-6 hover:border-orange-500/50 transition-all"
-              >
-                <div className="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center mb-4">
-                  <Icon name={item.icon} size={24} className="text-orange-400" />
-                </div>
-                <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-                <p className="text-gray-400">{item.desc}</p>
+            {/* Городские события */}
+            <div className="bg-white/5 border border-orange-500/20 rounded-2xl p-6 hover:border-orange-500/50 transition-all">
+              <div className="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center mb-4">
+                <Icon name="MapPin" size={24} className="text-orange-400" />
               </div>
-            ))}
+              <h3 className="text-xl font-bold mb-2">Городские события</h3>
+              <p className="text-gray-400">Организуем и освещаем общественно важные мероприятия города — от фестивалей до форумов</p>
+            </div>
+
+            {/* Видеоотчёты */}
+            <div className="bg-white/5 border border-orange-500/20 rounded-2xl p-6 hover:border-orange-500/50 transition-all">
+              <div className="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center mb-4">
+                <Icon name="Camera" size={24} className="text-orange-400" />
+              </div>
+              <h3 className="text-xl font-bold mb-2">Видеоотчёты</h3>
+              <p className="text-gray-400">Документируем важные события — чтобы ничего не было забыто</p>
+            </div>
 
             {/* Сообщество */}
             <div className="bg-white/5 border border-orange-500/20 rounded-2xl p-6 hover:border-orange-500/50 transition-all flex flex-col justify-between">
@@ -263,30 +257,28 @@ const WildEast = () => {
                 Подписаться в ВК
               </a>
             </div>
+
+            {/* Подкасты */}
+            <a
+              href="https://vk.ru/video/playlist/-230198930_3"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-col justify-between bg-white/5 border border-orange-500/20 hover:border-orange-500/60 rounded-2xl p-6 transition-all group"
+            >
+              <div>
+                <div className="w-12 h-12 bg-[#0077FF]/15 rounded-xl flex items-center justify-center mb-4">
+                  <Icon name="Mic2" size={24} className="text-[#0077FF]" />
+                </div>
+                <h3 className="text-xl font-bold mb-2 group-hover:text-orange-400 transition-colors">Подкасты</h3>
+                <p className="text-gray-400">Разговоры о городе, спорте и людях Дальнего Востока</p>
+              </div>
+              <div className="mt-4 inline-flex items-center gap-2 text-[#0077FF] text-sm font-medium">
+                Смотреть в ВК <Icon name="ExternalLink" size={14} />
+              </div>
+            </a>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-4">
-            {[
-              { href: "https://vk.ru/video/playlist/-230198930_3", icon: "Mic2", label: "Подкасты", desc: "Разговоры о городе, спорте и людях Дальнего Востока" },
-            ].map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-5 bg-white/5 border border-orange-500/20 hover:border-orange-500/60 rounded-2xl p-6 transition-all group"
-              >
-                <div className="w-14 h-14 bg-[#0077FF]/15 rounded-2xl flex items-center justify-center flex-shrink-0">
-                  <Icon name={item.icon} size={26} className="text-[#0077FF]" />
-                </div>
-                <div className="flex-1">
-                  <p className="font-bold text-lg group-hover:text-orange-400 transition-colors">{item.label}</p>
-                  <p className="text-gray-500 text-sm mt-1">{item.desc}</p>
-                </div>
-                <Icon name="ExternalLink" size={18} className="text-gray-600 group-hover:text-orange-400 transition-colors flex-shrink-0" />
-              </a>
-            ))}
-          </div>
+
         </div>
       </section>
 
