@@ -212,10 +212,10 @@ const DjPage = () => {
 
           <div className="space-y-4">
             {[
-              { href: "https://vk.com/audio48332695_456239404_3cdb75d91bf0ddb3d4", title: "Сет #1", label: "Открыть в ВК" },
-              { href: "https://vk.com/audio48332695_456239400_b5396d8693d4569679", title: "Сет #2", label: "Открыть в ВК" },
-              { href: "https://vk.com/audio48332695_456239395_9fb45f5c738f1dcb6d", title: "Сет #3", label: "Открыть в ВК" },
-              { href: "https://vk.com/audio48332695_456239354_bf2937f01bec603782", title: "Сет #4", label: "Открыть в ВК" },
+              { href: "https://vk.com/audio48332695_456239404_3cdb75d91bf0ddb3d4", title: "Плач и танцуй" },
+              { href: "https://vk.com/audio48332695_456239400_b5396d8693d4569679", title: "Пей и пой" },
+              { href: "https://vk.com/audio48332695_456239395_9fb45f5c738f1dcb6d", title: "Летнее настроение" },
+              { href: "https://vk.com/audio48332695_456239354_bf2937f01bec603782", title: "Шимановский Стиль" },
             ].map((item, i) => (
               <a
                 key={item.href}
