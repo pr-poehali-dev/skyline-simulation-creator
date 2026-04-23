@@ -19,46 +19,49 @@ def handler(event: dict, context) -> dict:
 
     body = json.loads(event.get('body', '{}'))
 
-    name = body.get('name', '').strip()
-    height = body.get('height', '').strip()
-    weight = body.get('weight', '').strip()
-    base = body.get('base', '').strip()
-    experience = body.get('experience', '').strip()
-    gym = body.get('gym', '').strip()
-    phone = body.get('phone', '').strip()
+    height  = body.get('height', '').strip()
+    weight  = body.get('weight', '').strip()
+    base    = body.get('base', '').strip()
+    exp     = body.get('exp', '').strip()
+    gym     = body.get('gym', '').strip()
+    age     = body.get('age', '').strip()
+    contact = body.get('contact', '').strip()
 
-    if not name or not phone:
+    if not contact:
         return {
             'statusCode': 400,
             'headers': cors,
-            'body': json.dumps({'ok': False, 'error': 'Заполните имя и телефон'}, ensure_ascii=False)
+            'body': json.dumps({'ok': False, 'error': 'Укажите контакт для связи'}, ensure_ascii=False)
         }
 
     now = datetime.now(timezone(timedelta(hours=10))).strftime('%d.%m.%Y %H:%M')
 
     msg = (
         f"\U0001f94a Новая заявка бойца — Дикий Восток\n\n"
-        f"\U0001f464 Имя: {name}\n"
-        f"\U0001f4de Телефон: {phone}\n"
-        f"\U0001f4cf Рост: {height or '-'}\n"
-        f"\u2696\ufe0f Вес: {weight or '-'}\n"
-        f"\U0001f3af База: {base or '-'}\n"
-        f"\U0001f3c6 Опыт / регалии: {experience or '-'}\n"
-        f"\U0001f3cb\ufe0f Зал / тренер: {gym or '-'}\n\n"
+        f"\U0001f4cf Рост: {height or '—'} см\n"
+        f"\u2696\ufe0f Вес: {weight or '—'} кг\n"
+        f"\U0001f3af База: {base or '—'}\n"
+        f"\U0001f3c6 Опыт / регалии: {exp or '—'}\n"
+        f"\U0001f3cb\ufe0f Зал / тренер: {gym or '—'}\n"
+        f"\U0001f4c5 Возраст: {age or '—'} лет\n"
+        f"\U0001f4f2 Обратная связь: {contact}\n\n"
         f"\U0001f554 {now} (Хабаровск)"
     )
 
-    token = os.environ.get('TELEGRAM_BOT_TOKEN', '')
+    token   = os.environ.get('TELEGRAM_BOT_TOKEN', '')
     chat_id = os.environ.get('TELEGRAM_CHAT_ID', '')
 
     if token and chat_id:
         data = urllib.parse.urlencode({'chat_id': chat_id, 'text': msg}).encode()
-        req = urllib.request.Request(
+        req  = urllib.request.Request(
             f"https://api.telegram.org/bot{token}/sendMessage",
             data=data,
             method='POST'
         )
-        urllib.request.urlopen(req, timeout=10)
+        try:
+            urllib.request.urlopen(req, timeout=10)
+        except Exception:
+            pass
 
     return {
         'statusCode': 200,

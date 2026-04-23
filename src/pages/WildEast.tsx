@@ -1,11 +1,40 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import Icon from "@/components/ui/icon";
+
+const FIGHTER_URL = "https://functions.poehali.dev/8239bcc3-4c1a-491a-beff-b3feae235dcd";
 
 const WildEast = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const [form, setForm] = useState({ height: "", weight: "", base: "", exp: "", gym: "", age: "", contact: "" });
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!form.contact.trim()) { setError("Укажите контакт для связи"); return; }
+    setSubmitting(true); setError("");
+    try {
+      const res = await fetch(FIGHTER_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      const data = await res.json();
+      if (data.ok) setSubmitted(true);
+      else setError("Ошибка отправки, попробуйте ещё раз");
+    } catch {
+      setError("Ошибка соединения");
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -425,45 +454,116 @@ const WildEast = () => {
         </div>
       </section>
 
-      {/* Contact */}
+      {/* Fighter Apply */}
       <section id="contact" className="py-24 px-4 bg-gradient-to-b from-black to-orange-950/20">
-        <div className="container mx-auto max-w-2xl text-center">
-          <img
-            src="https://cdn.poehali.dev/files/652bcd60-84e4-4270-a4ad-eb53f2fef27d.png"
-            alt="Дикий Восток"
-            className="w-32 h-32 mx-auto object-contain mb-8 opacity-80"
-          />
-          <h2 className="text-4xl md:text-5xl font-black mb-4">
-            Хочешь участвовать?
-          </h2>
-          <p className="text-gray-400 text-lg mb-10">
-            Участие в турнирах, партнёрство, сотрудничество — пиши напрямую
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="https://wa.me/79141983629"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button
-                size="lg"
-                className="bg-green-600 hover:bg-green-700 text-white text-lg px-8 py-6 border-0 w-full sm:w-auto"
-              >
-                <Icon name="MessageCircle" size={20} className="mr-2" />
-                WhatsApp
-              </Button>
-            </a>
-            <a href="tel:+79141983629">
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-orange-500 text-orange-400 hover:bg-orange-500/10 text-lg px-8 py-6 w-full sm:w-auto"
-              >
-                <Icon name="Phone" size={20} className="mr-2" />
-                +7 (914) 198-36-29
-              </Button>
-            </a>
+        <div className="container mx-auto max-w-2xl">
+          <div className="text-center mb-10">
+            <img
+              src="https://cdn.poehali.dev/files/652bcd60-84e4-4270-a4ad-eb53f2fef27d.png"
+              alt="Дикий Восток"
+              className="w-24 h-24 mx-auto object-contain mb-6 opacity-80"
+            />
+            <h2 className="text-4xl md:text-5xl font-black mb-3">Хочешь участвовать?</h2>
+            <p className="text-gray-400 text-lg">Заполни заявку — мы свяжемся и обсудим условия</p>
           </div>
+
+          {submitted ? (
+            <div className="bg-orange-950/30 border border-orange-500/30 rounded-2xl p-10 text-center">
+              <Icon name="CheckCircle" size={48} className="text-orange-400 mx-auto mb-4" />
+              <h3 className="text-2xl font-bold mb-2">Заявка принята!</h3>
+              <p className="text-gray-400">Свяжемся с тобой в ближайшее время</p>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="bg-white/5 border border-orange-500/20 rounded-2xl p-6 md:p-8 space-y-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="text-gray-400 text-sm mb-1.5 block">Рост (см)</label>
+                  <Input
+                    placeholder="180"
+                    value={form.height}
+                    onChange={(e) => setForm((f) => ({ ...f, height: e.target.value }))}
+                    className="bg-white/5 border-white/10 text-white placeholder-gray-600 focus:border-orange-500/50"
+                  />
+                </div>
+                <div>
+                  <label className="text-gray-400 text-sm mb-1.5 block">Вес (кг)</label>
+                  <Input
+                    placeholder="77"
+                    value={form.weight}
+                    onChange={(e) => setForm((f) => ({ ...f, weight: e.target.value }))}
+                    className="bg-white/5 border-white/10 text-white placeholder-gray-600 focus:border-orange-500/50"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="text-gray-400 text-sm mb-1.5 block">База</label>
+                  <Input
+                    placeholder="ММА, бокс, борьба..."
+                    value={form.base}
+                    onChange={(e) => setForm((f) => ({ ...f, base: e.target.value }))}
+                    className="bg-white/5 border-white/10 text-white placeholder-gray-600 focus:border-orange-500/50"
+                  />
+                </div>
+                <div>
+                  <label className="text-gray-400 text-sm mb-1.5 block">Возраст (лет)</label>
+                  <Input
+                    placeholder="24"
+                    value={form.age}
+                    onChange={(e) => setForm((f) => ({ ...f, age: e.target.value }))}
+                    className="bg-white/5 border-white/10 text-white placeholder-gray-600 focus:border-orange-500/50"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="text-gray-400 text-sm mb-1.5 block">Опыт / регалии</label>
+                <Input
+                  placeholder="КМС, МС, количество боёв, победы..."
+                  value={form.exp}
+                  onChange={(e) => setForm((f) => ({ ...f, exp: e.target.value }))}
+                  className="bg-white/5 border-white/10 text-white placeholder-gray-600 focus:border-orange-500/50"
+                />
+              </div>
+
+              <div>
+                <label className="text-gray-400 text-sm mb-1.5 block">Зал / тренер</label>
+                <Input
+                  placeholder="Название зала и имя тренера"
+                  value={form.gym}
+                  onChange={(e) => setForm((f) => ({ ...f, gym: e.target.value }))}
+                  className="bg-white/5 border-white/10 text-white placeholder-gray-600 focus:border-orange-500/50"
+                />
+              </div>
+
+              <div>
+                <label className="text-gray-400 text-sm mb-1.5 block">Обратная связь — номер / соцсети *</label>
+                <Input
+                  placeholder="+7 (914) ... или @nickname"
+                  value={form.contact}
+                  onChange={(e) => setForm((f) => ({ ...f, contact: e.target.value }))}
+                  required
+                  className="bg-white/5 border-white/10 text-white placeholder-gray-600 focus:border-orange-500/50"
+                />
+              </div>
+
+              {error && <p className="text-red-400 text-sm">{error}</p>}
+
+              <Button
+                type="submit"
+                disabled={submitting}
+                size="lg"
+                className="w-full bg-orange-600 hover:bg-orange-700 text-white border-0 text-base font-bold py-6"
+              >
+                {submitting ? (
+                  <><Icon name="Loader2" size={18} className="mr-2 animate-spin" />Отправка...</>
+                ) : (
+                  <><Icon name="Send" size={18} className="mr-2" />Отправить заявку</>
+                )}
+              </Button>
+            </form>
+          )}
         </div>
       </section>
 

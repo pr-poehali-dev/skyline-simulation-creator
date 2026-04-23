@@ -4,7 +4,7 @@
       "name": "POST fighter apply",
       "method": "POST",
       "path": "/",
-      "body": {"name": "Иван Тестов", "phone": "+79001234567", "height": "180", "weight": "80", "base": "ММА", "experience": "КМС", "gym": "Динамо"},
+      "body": {"height": "180", "weight": "77", "base": "ММА", "exp": "КМС", "gym": "Динамо", "age": "24", "contact": "+79001234567"},
       "expectedStatus": 200
     }
   ]
