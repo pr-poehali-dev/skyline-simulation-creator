@@ -31,7 +31,6 @@ const Footer = () => {
   }, []);
 
   const downloadPdf = async () => {
-    if (!qrDataUrl || !photoDataUrl) return;
     setLoading(true);
     try {
       const html2canvas = (await import("html2canvas")).default;
@@ -39,15 +38,23 @@ const Footer = () => {
 
       const el = cardRef.current!;
       el.style.display = "flex";
-      await new Promise((r) => setTimeout(r, 150));
+      await new Promise((r) => setTimeout(r, 200));
 
-      const canvas = await html2canvas(el, { scale: 3, backgroundColor: "#18181b", useCORS: true, logging: false });
+      const canvas = await html2canvas(el, {
+        scale: 3,
+        backgroundColor: "#18181b",
+        useCORS: true,
+        allowTaint: true,
+        logging: false,
+      });
       el.style.display = "none";
 
       const imgData = canvas.toDataURL("image/png");
       const pdf = new jsPDF({ orientation: "landscape", unit: "mm", format: [100, 60] });
       pdf.addImage(imgData, "PNG", 0, 0, 100, 60);
       pdf.save("maratkanow-vizitka.pdf");
+    } catch {
+      if (cardRef.current) cardRef.current.style.display = "none";
     } finally {
       setLoading(false);
     }
@@ -136,10 +143,10 @@ const Footer = () => {
             <button
               onClick={downloadPdf}
               disabled={loading}
-              className="flex items-center gap-2 text-zinc-400 hover:text-white transition-colors border border-white/20 hover:border-white/40 px-4 py-1.5 rounded-full text-sm"
+              className="flex items-center gap-2 text-zinc-400 hover:text-white transition-colors border border-white/20 hover:border-white/40 px-4 py-1.5 rounded-full text-sm disabled:opacity-50"
             >
               <Download size={15} />
-              {loading ? "Генерация..." : "Визитка"}
+              {loading ? "Генерация..." : "Визитка PDF"}
             </button>
           </div>
         </div>
