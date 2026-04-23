@@ -31,6 +31,32 @@ const DjPage = () => {
     return () => clearInterval(timer);
   }, []);
 
+  useEffect(() => {
+    const prevTitle = document.title;
+    const prevDesc = document.querySelector('meta[name="description"]')?.getAttribute("content");
+    const prevKw = document.querySelector('meta[name="keywords"]')?.getAttribute("content");
+
+    document.title = "DJ Puzyr'koff — диджей Хабаровск, Владивосток, Дальний Восток | eventkhv.ru";
+    document.querySelector('meta[name="description"]')?.setAttribute("content", "DJ Puzyr'koff — профессиональный диджей из Хабаровска. Поп, реп, техно, Afro, коммерческие ремиксы. Выступления в Хабаровске, Владивостоке, Находке, Благовещенске. 100+ вечеринок, 10 лет опыта. Обучение диджеингу.");
+    document.querySelector('meta[name="keywords"]')?.setAttribute("content", "DJ Хабаровск, диджей Хабаровск, DJ Puzyr'koff, диджей на вечеринку Хабаровск, диджей на корпоратив Хабаровск, музыка на мероприятие Хабаровск, DJ Владивосток, диджей Дальний Восток, обучение диджеингу Хабаровск, клубный диджей Хабаровск, техно Хабаровск, Afro музыка");
+
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    const ogDesc = document.querySelector('meta[property="og:description"]');
+    const ogUrl = document.querySelector('meta[property="og:url"]');
+    if (ogTitle) ogTitle.setAttribute("content", "DJ Puzyr'koff — диджей Хабаровск и Дальний Восток");
+    if (ogDesc) ogDesc.setAttribute("content", "Профессиональный диджей. Поп, реп, техно, Afro. Выступления в Хабаровске, Владивостоке, Находке, Благовещенске. 100+ вечеринок.");
+    if (ogUrl) ogUrl.setAttribute("content", "https://eventkhv.ru/dj");
+
+    return () => {
+      document.title = prevTitle;
+      if (prevDesc) document.querySelector('meta[name="description"]')?.setAttribute("content", prevDesc);
+      if (prevKw) document.querySelector('meta[name="keywords"]')?.setAttribute("content", prevKw);
+      if (ogTitle) ogTitle.setAttribute("content", "Антон Маратканов — ведущий, организатор ММА и бокс турниров, DJ Хабаровск");
+      if (ogDesc) ogDesc.setAttribute("content", "Профессиональный ведущий мероприятий, организатор бойцовских турниров ММА и бокса, благотворительных акций. DJ Puzyr'koff — музыка для событий.");
+      if (ogUrl) ogUrl.setAttribute("content", "https://eventkhv.ru");
+    };
+  }, []);
+
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: "smooth" });
