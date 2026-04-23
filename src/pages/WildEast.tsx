@@ -175,22 +175,30 @@ const WildEast = () => {
             ))}
           </div>
 
-          <a
-            href="https://vk.com/wild_east_khv"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-6 bg-white/5 border border-orange-500/20 hover:border-orange-500/60 rounded-2xl p-6 transition-all group"
-          >
-            <div className="w-16 h-16 bg-[#0077FF]/20 rounded-2xl flex items-center justify-center flex-shrink-0">
-              <Icon name="Play" size={28} className="text-[#0077FF]" />
-            </div>
-            <div className="flex-1">
-              <p className="text-sm text-gray-500 mb-1">ВКонтакте</p>
-              <h3 className="text-xl font-bold group-hover:text-orange-400 transition-colors">Видео и фото с турниров</h3>
-              <p className="text-gray-400 text-sm mt-1">Все записи боёв и фотоотчёты в нашей группе ВК</p>
-            </div>
-            <Icon name="ExternalLink" size={20} className="text-gray-600 group-hover:text-orange-400 transition-colors flex-shrink-0" />
-          </a>
+          <div className="grid md:grid-cols-3 gap-4">
+            {[
+              { href: "https://vk.ru/video/playlist/-230198930_2", icon: "Swords", label: "Первые бои", desc: "Видеозаписи первых турниров" },
+              { href: "https://vk.ru/video/playlist/-230198930_4", icon: "Play", label: "Все бои", desc: "Полный архив видео с боёв" },
+              { href: "https://vk.com/albums-230198930", icon: "Camera", label: "Фотоотчёты", desc: "Фотографии с турниров" },
+            ].map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex flex-col items-center gap-3 bg-white/5 border border-orange-500/20 hover:border-orange-500/60 rounded-2xl p-6 transition-all group text-center"
+              >
+                <div className="w-14 h-14 bg-[#0077FF]/15 rounded-2xl flex items-center justify-center">
+                  <Icon name={item.icon} size={26} className="text-[#0077FF]" />
+                </div>
+                <div>
+                  <p className="font-bold group-hover:text-orange-400 transition-colors">{item.label}</p>
+                  <p className="text-gray-500 text-sm mt-1">{item.desc}</p>
+                </div>
+                <Icon name="ExternalLink" size={14} className="text-gray-600 group-hover:text-orange-400 transition-colors" />
+              </a>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -246,34 +254,28 @@ const WildEast = () => {
             ))}
           </div>
 
-          <div className="bg-white/5 border border-orange-500/20 rounded-2xl overflow-hidden">
-            <div className="p-6 border-b border-orange-500/20 flex items-center justify-between">
-              <div>
-                <h3 className="text-xl font-bold text-orange-400">Видеоотчёты с мероприятий</h3>
-                <p className="text-gray-500 text-sm mt-1">Скоро здесь появятся видео</p>
-              </div>
+          <div className="grid md:grid-cols-2 gap-4">
+            {[
+              { href: "https://vk.ru/video/playlist/-230198930_3", icon: "Mic2", label: "Подкасты", desc: "Разговоры о городе, спорте и людях Дальнего Востока" },
+              { href: "https://vk.ru/video/playlist/-230198930_1", icon: "Users", label: "Конференции", desc: "Видеозаписи городских форумов и конференций" },
+            ].map((item) => (
               <a
-                href="https://vk.com/wild_east_khv"
+                key={item.label}
+                href={item.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-[#0077FF] hover:text-blue-300 transition-colors text-sm font-medium"
+                className="flex items-center gap-5 bg-white/5 border border-orange-500/20 hover:border-orange-500/60 rounded-2xl p-6 transition-all group"
               >
-                Все видео в ВК <Icon name="ExternalLink" size={14} />
-              </a>
-            </div>
-            <div className="grid md:grid-cols-3 gap-4 p-6">
-              {[1, 2, 3].map((i) => (
-                <div
-                  key={i}
-                  className="aspect-video bg-black/50 border border-white/10 rounded-xl flex flex-col items-center justify-center gap-3"
-                >
-                  <div className="w-14 h-14 bg-orange-500/20 rounded-full flex items-center justify-center">
-                    <Icon name="Play" size={24} className="text-orange-400 ml-1" />
-                  </div>
-                  <span className="text-gray-500 text-xs">Скоро</span>
+                <div className="w-14 h-14 bg-[#0077FF]/15 rounded-2xl flex items-center justify-center flex-shrink-0">
+                  <Icon name={item.icon} size={26} className="text-[#0077FF]" />
                 </div>
-              ))}
-            </div>
+                <div className="flex-1">
+                  <p className="font-bold text-lg group-hover:text-orange-400 transition-colors">{item.label}</p>
+                  <p className="text-gray-500 text-sm mt-1">{item.desc}</p>
+                </div>
+                <Icon name="ExternalLink" size={18} className="text-gray-600 group-hover:text-orange-400 transition-colors flex-shrink-0" />
+              </a>
+            ))}
           </div>
         </div>
       </section>
