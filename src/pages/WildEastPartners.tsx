@@ -115,12 +115,24 @@ const WildEastPartners = () => {
               конференции, городские праздники. Записываем подкасты о жизни Хабаровска,
               спорте и людях, которые делают Дальний Восток лучше.
             </p>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 12 }}>
               {[
                 { title: "Подкасты", desc: "Разговоры о городе, спорте и людях Дальнего Востока" },
                 { title: "Видеоотчёты", desc: "Документируем важные городские события" },
                 { title: "Городские события", desc: "Организация и освещение общественных мероприятий" },
                 { title: "Сообщество ВК", desc: "Онлайн-площадка для всех, кому важен Дальний Восток" },
+              ].map((item) => (
+                <div key={item.title} style={{ background: "#fff8f5", border: "1px solid #fed7aa", borderRadius: 10, padding: "14px 16px" }}>
+                  <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 4 }}>{item.title}</div>
+                  <div style={{ fontSize: 12, color: "#666" }}>{item.desc}</div>
+                </div>
+              ))}
+            </div>
+            <p style={{ fontSize: 13, fontWeight: 700, color: "#333", margin: "16px 0 8px" }}>Проведённые мероприятия:</p>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+              {[
+                { title: "Сила духа", desc: "Мероприятие по интеграции ветеранов в мирную жизнь" },
+                { title: "Богатырская весна", desc: "Проводы зимы и встреча весны с русскими традициями" },
               ].map((item) => (
                 <div key={item.title} style={{ background: "#fff8f5", border: "1px solid #fed7aa", borderRadius: 10, padding: "14px 16px" }}>
                   <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 4 }}>{item.title}</div>
