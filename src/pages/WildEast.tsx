@@ -103,8 +103,8 @@ const WildEast = () => {
             Хабаровск
           </p>
           <h1 className="text-4xl md:text-6xl font-black mb-6 leading-tight">
-            Сила. Дух.{" "}
-            <span className="text-orange-500">Восток.</span>
+            Бойцовская лига, дающая дорогу в{" "}
+            <span className="text-orange-500">большой спорт.</span>
           </h1>
           <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-10">
             Организация бойцовских турниров и общественно значимых городских мероприятий в Хабаровске
