@@ -65,6 +65,14 @@ const WildEast = () => {
               </li>
               <li>
                 <button
+                  onClick={() => scrollToSection("charity")}
+                  className="text-white hover:text-orange-400 transition-colors"
+                >
+                  Благотворительность
+                </button>
+              </li>
+              <li>
+                <button
                   onClick={() => scrollToSection("contact")}
                   className="text-white hover:text-orange-400 transition-colors"
                 >
@@ -277,8 +285,62 @@ const WildEast = () => {
               </div>
             </a>
           </div>
+        </div>
+      </section>
 
+      {/* Divider */}
+      <div className="container mx-auto max-w-5xl px-4">
+        <div className="h-px bg-gradient-to-r from-transparent via-orange-500/50 to-transparent" />
+      </div>
 
+      {/* Charity Section */}
+      <section id="charity" className="py-24 px-4">
+        <div className="container mx-auto max-w-5xl">
+          <div className="flex items-center gap-4 mb-4">
+            <div className="w-1 h-12 bg-orange-500 rounded-full" />
+            <h2 className="text-4xl md:text-5xl font-black">Благотворительность</h2>
+          </div>
+          <p className="text-gray-400 text-lg mb-12 ml-5 max-w-3xl">
+            Сила — это не только победы на ринге. Настоящая сила в том, чтобы не проходить мимо, когда рядом кто-то нуждается в помощи. Наша лига помнит об этом и делает конкретные дела.
+          </p>
+
+          <div className="grid md:grid-cols-2 gap-6 mb-8">
+            {/* Независимость */}
+            <div className="bg-white/5 border border-orange-500/20 rounded-2xl p-6 hover:border-orange-500/50 transition-all">
+              <div className="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center mb-4">
+                <Icon name="Shield" size={24} className="text-orange-400" />
+              </div>
+              <h3 className="text-xl font-bold mb-2">Центр «Независимость»</h3>
+              <p className="text-gray-400">Поддерживаем людей, которые борются со своими зависимостями и выбирают новый путь. Потому что каждый заслуживает второго шанса.</p>
+            </div>
+
+            {/* Росточек */}
+            <div className="bg-white/5 border border-orange-500/20 rounded-2xl p-6 hover:border-orange-500/50 transition-all">
+              <div className="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center mb-4">
+                <Icon name="Sprout" size={24} className="text-orange-400" />
+              </div>
+              <h3 className="text-xl font-bold mb-2">Фонд «Росточек»</h3>
+              <p className="text-gray-400">Помогаем фонду, который заботится о детях-сиротах, детях с ограниченными возможностями и семьях в трудной ситуации. Продвигаем идеи семейного устройства и толерантности в обществе.</p>
+            </div>
+
+            {/* Чужих детей не бывает */}
+            <div className="bg-white/5 border border-orange-500/20 rounded-2xl p-6 hover:border-orange-500/50 transition-all">
+              <div className="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center mb-4">
+                <Icon name="Heart" size={24} className="text-orange-400" />
+              </div>
+              <h3 className="text-xl font-bold mb-2">«Чужих детей не бывает!»</h3>
+              <p className="text-gray-400">Сотрудничаем с фондом помощи детям, потому что верим: равнодушие — не наш выбор. Каждый ребёнок важен.</p>
+            </div>
+
+            {/* Праздники двора */}
+            <div className="bg-white/5 border border-orange-500/20 rounded-2xl p-6 hover:border-orange-500/50 transition-all">
+              <div className="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center mb-4">
+                <Icon name="PartyPopper" size={24} className="text-orange-400" />
+              </div>
+              <h3 className="text-xl font-bold mb-2">Праздники двора</h3>
+              <p className="text-gray-400">Организуем бесплатные праздники для жителей разных районов Хабаровска — потому что радость должна быть доступна каждому.</p>
+            </div>
+          </div>
         </div>
       </section>
 
