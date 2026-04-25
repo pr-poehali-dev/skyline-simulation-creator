@@ -1,60 +1,78 @@
 import { Instagram, Phone, Download } from "lucide-react";
-import { useRef, useState, useEffect } from "react";
-
-const PHOTO_URL = "https://cdn.poehali.dev/projects/fae007b7-7e60-4256-9806-87e49c645681/bucket/15925843-fd60-4a2c-a48e-0d9212831e0c.jpg";
+import { useState } from "react";
 
 const Footer = () => {
-  const cardRef = useRef<HTMLDivElement>(null);
   const [loading, setLoading] = useState(false);
-  const [qrDataUrl, setQrDataUrl] = useState("");
-  const [photoDataUrl, setPhotoDataUrl] = useState("");
-
-  // Предзагружаем QR и фото как base64 чтобы html2canvas мог их захватить
-  useEffect(() => {
-    // Генерируем QR
-    import("qrcode").then((QRCode) => {
-      QRCode.toDataURL("https://eventkhv.ru", { width: 200, margin: 1, color: { dark: "#ffffff", light: "#18181b" } })
-        .then(setQrDataUrl);
-    });
-
-    // Конвертируем фото в base64 через canvas
-    const img = new Image();
-    img.crossOrigin = "anonymous";
-    img.onload = () => {
-      const c = document.createElement("canvas");
-      c.width = img.width;
-      c.height = img.height;
-      c.getContext("2d")!.drawImage(img, 0, 0);
-      setPhotoDataUrl(c.toDataURL("image/jpeg"));
-    };
-    img.src = PHOTO_URL;
-  }, []);
 
   const downloadPdf = async () => {
     setLoading(true);
     try {
-      const html2canvas = (await import("html2canvas")).default;
       const { jsPDF } = await import("jspdf");
 
-      const el = cardRef.current!;
-      el.style.display = "flex";
-      await new Promise((r) => setTimeout(r, 200));
+      // Стандартный размер визитки 90x50 мм, альбомная
+      const W = 90;
+      const H = 50;
+      const pdf = new jsPDF({ orientation: "landscape", unit: "mm", format: [H, W] });
 
-      const canvas = await html2canvas(el, {
-        scale: 3,
-        backgroundColor: "#18181b",
-        useCORS: true,
-        allowTaint: true,
-        logging: false,
+      // Фон тёмный
+      pdf.setFillColor(24, 24, 27);
+      pdf.rect(0, 0, W, H, "F");
+
+      // Акцентная полоса слева
+      pdf.setFillColor(234, 88, 12); // orange-600
+      pdf.rect(0, 0, 2.5, H, "F");
+
+      // Имя
+      pdf.setFont("helvetica", "bold");
+      pdf.setFontSize(14);
+      pdf.setTextColor(255, 255, 255);
+      pdf.text("Антон Маратканов", 7, 11);
+
+      // Должность
+      pdf.setFont("helvetica", "normal");
+      pdf.setFontSize(8);
+      pdf.setTextColor(161, 161, 170);
+      pdf.text("Ведущий мероприятий · DJ Puzyr'koff", 7, 17);
+
+      // Разделитель
+      pdf.setDrawColor(63, 63, 70);
+      pdf.setLineWidth(0.3);
+      pdf.line(7, 21, W - 7, 21);
+
+      // Контакты
+      pdf.setFontSize(8);
+      pdf.setTextColor(212, 212, 216);
+
+      const contacts = [
+        { icon: "T:", value: "+7 (914) 198-36-29" },
+        { icon: "W:", value: "eventkhv.ru" },
+        { icon: "I:", value: "@maratkanovevent" },
+      ];
+
+      contacts.forEach((c, i) => {
+        const y = 27 + i * 5.5;
+        pdf.setFont("helvetica", "bold");
+        pdf.setTextColor(234, 88, 12);
+        pdf.text(c.icon, 7, y);
+        pdf.setFont("helvetica", "normal");
+        pdf.setTextColor(212, 212, 216);
+        pdf.text(c.value, 12, y);
       });
-      el.style.display = "none";
 
-      const imgData = canvas.toDataURL("image/png");
-      const pdf = new jsPDF({ orientation: "landscape", unit: "mm", format: [100, 60] });
-      pdf.addImage(imgData, "PNG", 0, 0, 100, 60);
+      // Специализация (снизу)
+      pdf.setFontSize(6.5);
+      pdf.setTextColor(113, 113, 122);
+      pdf.text("Свадьбы · Корпоративы · Дни рождения · Выпускные · Турниры ММА", 7, H - 5);
+
+      // Город и опыт (справа внизу)
+      pdf.setFontSize(6.5);
+      pdf.setTextColor(113, 113, 122);
+      pdf.text("Хабаровск / Дальний Восток", W - 7, 27, { align: "right" });
+      pdf.text("10+ лет · 300+ мероприятий", W - 7, 32, { align: "right" });
+
       pdf.save("maratkanow-vizitka.pdf");
-    } catch {
-      if (cardRef.current) cardRef.current.style.display = "none";
+    } catch (e) {
+      console.error(e);
     } finally {
       setLoading(false);
     }
@@ -62,70 +80,6 @@ const Footer = () => {
 
   return (
     <footer className="bg-black py-8 border-t border-white/10">
-      {/* Скрытая визитка для рендера в PDF */}
-      <div
-        ref={cardRef}
-        style={{
-          display: "none",
-          width: "800px",
-          height: "480px",
-          background: "#18181b",
-          borderRadius: "0px",
-          padding: "36px 40px",
-          fontFamily: "Arial, sans-serif",
-          color: "#fff",
-          boxSizing: "border-box",
-          position: "fixed",
-          left: "-9999px",
-          top: "0",
-          alignItems: "stretch",
-          gap: "32px",
-        }}
-      >
-        {/* Левая колонка — контент */}
-        <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-          {/* Шапка с фото */}
-          <div style={{ display: "flex", alignItems: "center", gap: "20px", marginBottom: "20px" }}>
-            {photoDataUrl && (
-              <img
-                src={photoDataUrl}
-                alt=""
-                style={{ width: "80px", height: "80px", borderRadius: "50%", objectFit: "cover", objectPosition: "top", border: "2px solid rgba(255,255,255,0.2)", flexShrink: 0 }}
-              />
-            )}
-            <div>
-              <div style={{ fontSize: "26px", fontWeight: "bold", letterSpacing: "-0.5px" }}>Антон Маратканов</div>
-              <div style={{ fontSize: "14px", color: "#a1a1aa", marginTop: "3px" }}>Ведущий мероприятий · DJ Puzyr'koff</div>
-              <div style={{ fontSize: "12px", color: "#71717a", marginTop: "3px" }}>Хабаровск / Дальний Восток · 10+ лет · 300+ мероприятий</div>
-            </div>
-          </div>
-
-          {/* Контакты */}
-          <div style={{ display: "flex", gap: "28px", marginBottom: "20px" }}>
-            <div style={{ fontSize: "14px", color: "#d4d4d8" }}>📞 +7 (914) 198-36-29</div>
-            <div style={{ fontSize: "14px", color: "#d4d4d8" }}>🌐 eventkhv.ru</div>
-            <div style={{ fontSize: "14px", color: "#d4d4d8" }}>📸 @maratkanovevent</div>
-          </div>
-
-          {/* Теги */}
-          <div style={{ borderTop: "1px solid rgba(255,255,255,0.1)", paddingTop: "16px" }}>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
-              {["✅ Свадьбы", "✅ Корпоративы", "✅ Дни рождения", "✅ Выпускные", "✅ ММА / Дикий Восток", "✅ DJ на мероприятие"].map((t) => (
-                <span key={t} style={{ background: "rgba(255,255,255,0.07)", borderRadius: "6px", padding: "4px 10px", fontSize: "12px", color: "#a1a1aa" }}>{t}</span>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Правая колонка — QR */}
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "8px", flexShrink: 0 }}>
-          {qrDataUrl && (
-            <img src={qrDataUrl} alt="QR" style={{ width: "130px", height: "130px" }} />
-          )}
-          <div style={{ fontSize: "11px", color: "#71717a", textAlign: "center" }}>Сканируй — перейди на сайт</div>
-        </div>
-      </div>
-
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-zinc-400">
