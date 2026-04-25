@@ -61,13 +61,20 @@ const WildEastApplyForm = ({
   return (
     <>
       {/* Fighter Apply */}
-      <section id="contact" className="py-24 px-4 bg-gradient-to-b from-black to-orange-950/20">
-        <div className="container mx-auto max-w-2xl">
+      <section id="contact" className="py-24 px-4 bg-gradient-to-b from-black to-orange-950/20 relative overflow-hidden">
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
+          <img
+            src="https://cdn.poehali.dev/files/652bcd60-84e4-4270-a4ad-eb53f2fef27d.png"
+            alt=""
+            className="w-[600px] h-[600px] object-contain opacity-[0.04]"
+          />
+        </div>
+        <div className="container mx-auto max-w-2xl relative z-10">
           <div className="text-center mb-10">
             <img
               src="https://cdn.poehali.dev/files/652bcd60-84e4-4270-a4ad-eb53f2fef27d.png"
               alt="Дикий Восток"
-              className="w-24 h-24 mx-auto object-contain mb-6 opacity-80"
+              className="w-32 h-32 mx-auto object-contain mb-6 drop-shadow-[0_0_30px_rgba(234,88,12,0.4)]"
             />
             <h2 className="text-4xl md:text-5xl font-black mb-3">Хочешь участвовать?</h2>
             <p className="text-gray-400 text-lg">Заполни заявку — мы свяжемся и обсудим условия</p>
