@@ -6,7 +6,21 @@ const WildEastEventsCharity = () => {
     <>
       {/* Events Section */}
       <section id="events" className="py-24 px-4 relative overflow-hidden">
-        <div className="container mx-auto max-w-5xl">
+        {/* Фоновый коллаж из 4 фото */}
+        <div className="absolute inset-0 grid grid-cols-2 grid-rows-2">
+          {[
+            "https://cdn.poehali.dev/files/4c75bd73-db4c-4d90-b759-3b4bb886c6ab.jpg",
+            "https://cdn.poehali.dev/files/c3cd22ee-cff6-4f50-8343-7b08a356b221.jpg",
+            "https://cdn.poehali.dev/files/99ce7f59-5257-41ee-bf19-4675fa9d20c0.jpg",
+            "https://cdn.poehali.dev/files/19eaa30d-28c0-4b11-bea6-e1e32ffa8ff3.jpg",
+          ].map((src, i) => (
+            <div key={i} className="overflow-hidden">
+              <img src={src} alt="" className="w-full h-full object-cover opacity-15" />
+            </div>
+          ))}
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
+        <div className="container mx-auto max-w-5xl relative z-10">
           <div className="flex items-center gap-4 mb-4">
             <div className="w-1 h-12 bg-orange-500 rounded-full" />
             <h2 className="text-4xl md:text-5xl font-black">Городские мероприятия</h2>
@@ -109,23 +123,6 @@ const WildEastEventsCharity = () => {
             ))}
           </div>
 
-          {/* Фотогалерея городских мероприятий */}
-          <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-3">
-            {[
-              { src: "https://cdn.poehali.dev/files/4c75bd73-db4c-4d90-b759-3b4bb886c6ab.jpg", alt: "Городское мероприятие" },
-              { src: "https://cdn.poehali.dev/files/c3cd22ee-cff6-4f50-8343-7b08a356b221.jpg", alt: "Городское мероприятие" },
-              { src: "https://cdn.poehali.dev/files/99ce7f59-5257-41ee-bf19-4675fa9d20c0.jpg", alt: "Городское мероприятие" },
-              { src: "https://cdn.poehali.dev/files/19eaa30d-28c0-4b11-bea6-e1e32ffa8ff3.jpg", alt: "Городское мероприятие" },
-            ].map((img, i) => (
-              <div key={i} className="aspect-square rounded-2xl overflow-hidden">
-                <img
-                  src={img.src}
-                  alt={img.alt}
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 

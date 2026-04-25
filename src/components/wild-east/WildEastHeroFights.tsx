@@ -61,11 +61,20 @@ const WildEastHeroFights = ({ scrollToSection }: Props) => {
 
       {/* Fights Section */}
       <section id="fights" className="py-24 px-4 relative overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center opacity-10"
-          style={{ backgroundImage: "url(https://cdn.poehali.dev/files/c0d9c9bc-d544-4827-8202-ba8abfd47ca7.jpg)" }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-black/60 to-black" />
+        {/* Фоновый коллаж из 4 фото */}
+        <div className="absolute inset-0 grid grid-cols-2 grid-rows-2">
+          {[
+            "https://cdn.poehali.dev/files/c0d9c9bc-d544-4827-8202-ba8abfd47ca7.jpg",
+            "https://cdn.poehali.dev/files/be418a6b-0a39-4cee-8ebc-11c59b627a8f.jpg",
+            "https://cdn.poehali.dev/files/7ac2796c-08bf-4162-8aa0-bb8982adb618.jpg",
+            "https://cdn.poehali.dev/files/f3a3b2d3-d2a6-494b-a4a4-9da5827b81d3.jpg",
+          ].map((src, i) => (
+            <div key={i} className="overflow-hidden">
+              <img src={src} alt="" className="w-full h-full object-cover opacity-20" />
+            </div>
+          ))}
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
         <div className="container mx-auto max-w-5xl relative z-10">
           <div className="flex items-center gap-4 mb-4">
             <div className="w-1 h-12 bg-orange-500 rounded-full" />
@@ -102,24 +111,6 @@ const WildEastHeroFights = ({ scrollToSection }: Props) => {
                 </div>
                 <h3 className="text-xl font-bold mb-2">{item.title}</h3>
                 <p className="text-gray-400">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Фотогалерея с боёв */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-12">
-            {[
-              "https://cdn.poehali.dev/files/c0d9c9bc-d544-4827-8202-ba8abfd47ca7.jpg",
-              "https://cdn.poehali.dev/files/be418a6b-0a39-4cee-8ebc-11c59b627a8f.jpg",
-              "https://cdn.poehali.dev/files/7ac2796c-08bf-4162-8aa0-bb8982adb618.jpg",
-              "https://cdn.poehali.dev/files/f3a3b2d3-d2a6-494b-a4a4-9da5827b81d3.jpg",
-            ].map((src, i) => (
-              <div key={i} className="aspect-square rounded-2xl overflow-hidden">
-                <img
-                  src={src}
-                  alt="Бой"
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                />
               </div>
             ))}
           </div>
