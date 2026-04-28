@@ -153,13 +153,21 @@ const WildEastEventsCharity = () => {
             </div>
 
             {/* Росточек */}
-            <div className="bg-white/5 border border-orange-500/20 rounded-2xl p-6 hover:border-orange-500/50 transition-all">
+            <a
+              href="https://vk.com/club62882008"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block bg-white/5 border border-orange-500/20 rounded-2xl p-6 hover:border-orange-500/50 transition-all group"
+            >
               <div className="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center mb-4">
                 <Icon name="Sprout" size={24} className="text-orange-400" />
               </div>
-              <h3 className="text-xl font-bold mb-2">Фонд «Росточек»</h3>
+              <h3 className="text-xl font-bold mb-2 group-hover:text-orange-400 transition-colors">Фонд «Росточек»</h3>
               <p className="text-gray-400">Помогаем фонду, который заботится о детях-сиротах, детях с ограниченными возможностями и семьях в трудной ситуации. Продвигаем идеи семейного устройства и толерантности в обществе.</p>
-            </div>
+              <div className="mt-3 inline-flex items-center gap-1 text-orange-400 text-sm font-medium">
+                Перейти в ВКонтакте <Icon name="ExternalLink" size={13} />
+              </div>
+            </a>
 
             {/* Чужих детей не бывает */}
             <a
@@ -209,21 +217,7 @@ const WildEastEventsCharity = () => {
                 />
                 <span className="text-xs text-gray-400 text-center group-hover:text-orange-400 transition-colors">Чужих детей не бывает</span>
               </a>
-              {/* БФ Росточек */}
-              <a
-                href="https://vk.com/club62882008"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-white/5 border border-orange-500/20 hover:border-orange-500/50 rounded-2xl p-4 flex flex-col items-center justify-center gap-3 transition-all group"
-              >
-                <div className="w-full h-32 bg-orange-500/10 rounded-xl flex items-center justify-center">
-                  <div className="text-center">
-                    <Icon name="Sprout" size={36} className="text-orange-400 mx-auto mb-2" />
-                    <span className="text-white font-bold text-sm">БФ Росточек</span>
-                  </div>
-                </div>
-                <span className="text-xs text-gray-400 text-center group-hover:text-orange-400 transition-colors">Фонд Росточек</span>
-              </a>
+
               {/* Талан */}
               <a
                 href="https://талан-хабаровск.рф/"
