@@ -162,13 +162,21 @@ const WildEastEventsCharity = () => {
             </div>
 
             {/* Чужих детей не бывает */}
-            <div className="bg-white/5 border border-orange-500/20 rounded-2xl p-6 hover:border-orange-500/50 transition-all">
+            <a
+              href="https://khabdety.ru/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block bg-white/5 border border-orange-500/20 rounded-2xl p-6 hover:border-orange-500/50 transition-all group"
+            >
               <div className="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center mb-4">
                 <Icon name="Heart" size={24} className="text-orange-400" />
               </div>
-              <h3 className="text-xl font-bold mb-2">«Чужих детей не бывает!»</h3>
+              <h3 className="text-xl font-bold mb-2 group-hover:text-orange-400 transition-colors">«Чужих детей не бывает!»</h3>
               <p className="text-gray-400">Сотрудничаем с фондом помощи детям, потому что верим: равнодушие — не наш выбор. Каждый ребёнок важен.</p>
-            </div>
+              <div className="mt-3 inline-flex items-center gap-1 text-orange-400 text-sm font-medium">
+                Перейти на сайт <Icon name="ExternalLink" size={13} />
+              </div>
+            </a>
 
             {/* Праздники двора */}
             <div className="bg-white/5 border border-orange-500/20 rounded-2xl p-6 hover:border-orange-500/50 transition-all">
@@ -177,6 +185,63 @@ const WildEastEventsCharity = () => {
               </div>
               <h3 className="text-xl font-bold mb-2">Праздники двора</h3>
               <p className="text-gray-400">Организуем бесплатные праздники для жителей разных районов Хабаровска — потому что радость должна быть доступна каждому.</p>
+            </div>
+          </div>
+
+          {/* Наши партнёры */}
+          <div className="mt-16">
+            <div className="flex items-center gap-4 mb-8">
+              <div className="w-1 h-10 bg-orange-500 rounded-full" />
+              <h3 className="text-2xl md:text-3xl font-black">Наши партнёры</h3>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {/* Чужих детей не бывает */}
+              <a
+                href="https://khabdety.ru/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white/5 border border-orange-500/20 hover:border-orange-500/50 rounded-2xl p-4 flex flex-col items-center justify-center gap-3 transition-all group"
+              >
+                <img
+                  src="https://cdn.poehali.dev/files/439fca13-87bd-4eca-8e9a-56af5a23488c.jpg"
+                  alt="Чужих детей не бывает"
+                  className="w-full h-32 object-contain rounded-xl"
+                />
+                <span className="text-xs text-gray-400 text-center group-hover:text-orange-400 transition-colors">Чужих детей не бывает</span>
+              </a>
+              {/* БФ Росточек */}
+              <a
+                href="https://vk.com/club62882008"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white/5 border border-orange-500/20 hover:border-orange-500/50 rounded-2xl p-4 flex flex-col items-center justify-center gap-3 transition-all group"
+              >
+                <div className="w-full h-32 bg-orange-500/10 rounded-xl flex items-center justify-center">
+                  <div className="text-center">
+                    <Icon name="Sprout" size={36} className="text-orange-400 mx-auto mb-2" />
+                    <span className="text-white font-bold text-sm">БФ Росточек</span>
+                  </div>
+                </div>
+                <span className="text-xs text-gray-400 text-center group-hover:text-orange-400 transition-colors">Фонд Росточек</span>
+              </a>
+              {/* Талан */}
+              <div className="bg-white/5 border border-orange-500/20 rounded-2xl p-4 flex flex-col items-center justify-center gap-3">
+                <img
+                  src="https://cdn.poehali.dev/files/f0ec2568-4c8f-4a41-923f-995852696a94.jpeg"
+                  alt="Талан"
+                  className="w-full h-32 object-contain rounded-xl"
+                />
+                <span className="text-xs text-gray-400 text-center">Талан</span>
+              </div>
+              {/* Авторадио */}
+              <div className="bg-white/5 border border-orange-500/20 rounded-2xl p-4 flex flex-col items-center justify-center gap-3">
+                <img
+                  src="https://cdn.poehali.dev/files/36480336-8616-431c-bb3e-899c65bda382.jpg"
+                  alt="Авторадио"
+                  className="w-full h-32 object-contain rounded-xl"
+                />
+                <span className="text-xs text-gray-400 text-center">Авторадио</span>
+              </div>
             </div>
           </div>
 
