@@ -225,23 +225,33 @@ const WildEastEventsCharity = () => {
                 <span className="text-xs text-gray-400 text-center group-hover:text-orange-400 transition-colors">Фонд Росточек</span>
               </a>
               {/* Талан */}
-              <div className="bg-white/5 border border-orange-500/20 rounded-2xl p-4 flex flex-col items-center justify-center gap-3">
+              <a
+                href="https://талан-хабаровск.рф/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white/5 border border-orange-500/20 hover:border-orange-500/50 rounded-2xl p-4 flex flex-col items-center justify-center gap-3 transition-all group"
+              >
                 <img
                   src="https://cdn.poehali.dev/files/f0ec2568-4c8f-4a41-923f-995852696a94.jpeg"
                   alt="Талан"
                   className="w-full h-32 object-contain rounded-xl"
                 />
-                <span className="text-xs text-gray-400 text-center">Талан</span>
-              </div>
+                <span className="text-xs text-gray-400 text-center group-hover:text-orange-400 transition-colors">Талан</span>
+              </a>
               {/* Авторадио */}
-              <div className="bg-white/5 border border-orange-500/20 rounded-2xl p-4 flex flex-col items-center justify-center gap-3">
+              <a
+                href="https://www.avtoradio.ru/radio/city/202"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white/5 border border-orange-500/20 hover:border-orange-500/50 rounded-2xl p-4 flex flex-col items-center justify-center gap-3 transition-all group"
+              >
                 <img
                   src="https://cdn.poehali.dev/files/36480336-8616-431c-bb3e-899c65bda382.jpg"
                   alt="Авторадио"
                   className="w-full h-32 object-contain rounded-xl"
                 />
-                <span className="text-xs text-gray-400 text-center">Авторадио</span>
-              </div>
+                <span className="text-xs text-gray-400 text-center group-hover:text-orange-400 transition-colors">Авторадио</span>
+              </a>
             </div>
           </div>
 
