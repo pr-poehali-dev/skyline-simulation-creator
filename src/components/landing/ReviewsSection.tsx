@@ -5,6 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
 const REVIEWS_URL = "https://functions.poehali.dev/78e331e8-8084-4f3d-908e-86fb4f4df52c";
+const PAGE_SIZE = 3;
+const INTERVAL_MS = 10000;
 
 interface Review {
   id: number;
@@ -22,7 +24,7 @@ const StarRating = ({ value, onChange }: { value: number; onChange?: (v: number)
         key={star}
         type="button"
         onClick={() => onChange?.(star)}
-        className={`text-2xl transition-transform ${onChange ? "hover:scale-110 cursor-pointer" : "cursor-default"}`}
+        className={`text-xl transition-transform ${onChange ? "hover:scale-110 cursor-pointer" : "cursor-default"}`}
       >
         <span className={star <= value ? "text-yellow-400" : "text-zinc-600"}>★</span>
       </button>
@@ -34,7 +36,8 @@ const EVENT_TYPES = ["Свадьба", "Корпоратив", "День рож�
 
 const ReviewsSection = () => {
   const [reviews, setReviews] = useState<Review[]>([]);
-  const [current, setCurrent] = useState(0);
+  const [page, setPage] = useState(0);
+  const [visible, setVisible] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -57,22 +60,33 @@ const ReviewsSection = () => {
       .catch(() => setReviews([]));
   }, []);
 
-  useEffect(() => {
-    if (reviews.length <= 1) return;
+  const totalPages = Math.ceil(reviews.length / PAGE_SIZE);
+
+  const startAutoPlay = (pagesCount: number) => {
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    if (pagesCount <= 1) return;
     intervalRef.current = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % reviews.length);
-    }, 5000);
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-    };
-  }, [reviews.length]);
+      setVisible(false);
+      setTimeout(() => {
+        setPage((prev) => (prev + 1) % pagesCount);
+        setVisible(true);
+      }, 400);
+    }, INTERVAL_MS);
+  };
+
+  useEffect(() => {
+    if (totalPages <= 1) return;
+    startAutoPlay(totalPages);
+    return () => { if (intervalRef.current) clearInterval(intervalRef.current); };
+  }, [totalPages]);
 
   const goTo = (idx: number) => {
-    setCurrent(idx);
-    if (intervalRef.current) clearInterval(intervalRef.current);
-    intervalRef.current = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % reviews.length);
-    }, 5000);
+    setVisible(false);
+    setTimeout(() => {
+      setPage(idx);
+      setVisible(true);
+    }, 400);
+    startAutoPlay(totalPages);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -98,11 +112,11 @@ const ReviewsSection = () => {
     }
   };
 
-  const review = reviews[current];
+  const pageReviews = reviews.slice(page * PAGE_SIZE, page * PAGE_SIZE + PAGE_SIZE);
 
   return (
     <section id="reviews" className="py-20 bg-black relative">
-      <div className="container mx-auto px-4 max-w-3xl">
+      <div className="container mx-auto px-4 max-w-5xl">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-3">Отзывы</h2>
           <p className="text-zinc-400 text-lg">Что говорят гости и организаторы</p>
@@ -110,7 +124,7 @@ const ReviewsSection = () => {
 
         {/* Форма */}
         {submitted ? (
-          <div className="mb-10 bg-green-900/30 border border-green-600/30 rounded-xl p-5 text-center">
+          <div className="mb-10 bg-green-900/30 border border-green-600/30 rounded-xl p-5 text-center max-w-xl mx-auto">
             <Icon name="CheckCircle" size={24} className="text-green-400 mx-auto mb-2" />
             <p className="text-green-300 font-medium">Спасибо за отзыв!</p>
             <p className="text-green-500 text-sm">Он появится после проверки</p>
@@ -126,7 +140,7 @@ const ReviewsSection = () => {
             </Button>
           </div>
         ) : (
-          <div className="mb-10 bg-zinc-900 border border-white/10 rounded-2xl p-6">
+          <div className="mb-10 bg-zinc-900 border border-white/10 rounded-2xl p-6 max-w-xl mx-auto">
             <div className="flex items-center justify-between mb-5">
               <h3 className="text-white font-bold text-lg">Ваш отзыв</h3>
               <button onClick={() => setShowForm(false)} className="text-zinc-500 hover:text-white">
@@ -185,37 +199,45 @@ const ReviewsSection = () => {
           </div>
         )}
 
-        {/* Слайдер отзывов */}
+        {/* Сетка отзывов */}
         {reviews.length === 0 ? (
           <div className="text-center py-12 text-zinc-500">
             <Icon name="MessageSquare" size={48} className="mx-auto mb-4 opacity-30" />
             <p>Пока отзывов нет — будь первым!</p>
           </div>
         ) : (
-          <div className="relative">
-            <div className="bg-zinc-900 border border-white/10 rounded-2xl p-8 min-h-[180px] flex flex-col gap-4 transition-all duration-500">
-              <StarRating value={review.rating} />
-              <p className="text-zinc-200 text-lg leading-relaxed flex-1">"{review.text}"</p>
-              <div className="border-t border-white/10 pt-4 flex items-center justify-between">
-                <div>
-                  <p className="text-white font-semibold">{review.author_name}</p>
-                  {review.event_type && (
-                    <p className="text-zinc-500 text-sm">{review.event_type}</p>
-                  )}
+          <div>
+            <div
+              className="grid grid-cols-1 md:grid-cols-3 gap-4 transition-opacity duration-400"
+              style={{ opacity: visible ? 1 : 0 }}
+            >
+              {pageReviews.map((r) => (
+                <div
+                  key={r.id}
+                  className="bg-zinc-900 border border-white/10 rounded-2xl p-6 flex flex-col gap-3"
+                >
+                  <StarRating value={r.rating} />
+                  <p className="text-zinc-200 text-sm leading-relaxed flex-1">"{r.text}"</p>
+                  <div className="border-t border-white/10 pt-3">
+                    <p className="text-white font-semibold text-sm">{r.author_name}</p>
+                    <div className="flex items-center justify-between mt-0.5">
+                      {r.event_type && <p className="text-zinc-500 text-xs">{r.event_type}</p>}
+                      <span className="text-zinc-600 text-xs ml-auto">{r.created_at}</span>
+                    </div>
+                  </div>
                 </div>
-                <span className="text-zinc-600 text-sm">{review.created_at}</span>
-              </div>
+              ))}
             </div>
 
             {/* Точки навигации */}
-            {reviews.length > 1 && (
-              <div className="flex justify-center gap-2 mt-5">
-                {reviews.map((_, idx) => (
+            {totalPages > 1 && (
+              <div className="flex justify-center gap-2 mt-7">
+                {Array.from({ length: totalPages }).map((_, idx) => (
                   <button
                     key={idx}
                     onClick={() => goTo(idx)}
                     className={`rounded-full transition-all duration-300 ${
-                      idx === current ? "w-6 h-2 bg-white" : "w-2 h-2 bg-zinc-600 hover:bg-zinc-400"
+                      idx === page ? "w-6 h-2 bg-white" : "w-2 h-2 bg-zinc-600 hover:bg-zinc-400"
                     }`}
                   />
                 ))}
