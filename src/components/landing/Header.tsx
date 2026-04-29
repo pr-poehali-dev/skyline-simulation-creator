@@ -75,6 +75,14 @@ const Header = () => {
             </li>
             <li>
               <button
+                onClick={() => scrollToSection("reviews")}
+                className="text-white hover:text-purple-400 transition-colors"
+              >
+                Отзывы
+              </button>
+            </li>
+            <li>
+              <button
                 onClick={() => scrollToSection("contact")}
                 className="text-white hover:text-purple-400 transition-colors"
               >
