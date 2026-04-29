@@ -32,9 +32,7 @@ export default function AdminReviews() {
   const fetchReviews = useCallback(async (adminKey: string) => {
     setLoading(true);
     try {
-      const res = await fetch(`${REVIEWS_URL}/admin`, {
-        headers: { "X-Admin-Key": adminKey },
-      });
+      const res = await fetch(`${REVIEWS_URL}/admin?key=${encodeURIComponent(adminKey)}`);
       const raw = await res.json();
       const data = typeof raw === "string" ? JSON.parse(raw) : raw;
       if (data.ok) {
@@ -68,8 +66,8 @@ export default function AdminReviews() {
     setActionId(id);
     await fetch(REVIEWS_URL, {
       method: "PUT",
-      headers: { "Content-Type": "application/json", "X-Admin-Key": key },
-      body: JSON.stringify({ id, is_approved: value }),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id, is_approved: value, key }),
     });
     setReviews((prev) => prev.map((r) => r.id === id ? { ...r, is_approved: value } : r));
     setActionId(null);
@@ -80,8 +78,8 @@ export default function AdminReviews() {
     setActionId(id);
     await fetch(REVIEWS_URL, {
       method: "DELETE",
-      headers: { "Content-Type": "application/json", "X-Admin-Key": key },
-      body: JSON.stringify({ id }),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id, key }),
     });
     setReviews((prev) => prev.filter((r) => r.id !== id));
     setActionId(null);

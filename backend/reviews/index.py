@@ -50,10 +50,12 @@ def handler(event: dict, context) -> dict:
 
         # GET /admin — список всех отзывов для модерации
         if method == 'GET' and path.endswith('/admin'):
-            admin_key = (event.get('headers') or {}).get('X-Admin-Key', '').strip()
+            headers = event.get('headers') or {}
+            admin_key = (headers.get('X-Admin-Key') or headers.get('x-admin-key') or event.get('queryStringParameters', {}).get('key', '')).strip()
             cur.execute("SELECT value FROM admin_settings WHERE key = 'admin_key'")
             row = cur.fetchone()
             stored_key = row[0].strip() if row else ''
+            print(f"DEBUG key='{admin_key}' stored='{stored_key}' match={admin_key==stored_key} headers={list(headers.keys())}")
             if admin_key != stored_key:
                 return {'statusCode': 403, 'headers': cors, 'body': json.dumps({'ok': False, 'error': 'Forbidden'})}
             cur.execute(
@@ -110,7 +112,9 @@ def handler(event: dict, context) -> dict:
 
         # PUT — одобрить/отклонить отзыв
         if method == 'PUT':
-            admin_key = (event.get('headers') or {}).get('X-Admin-Key', '').strip()
+            body = json.loads(event.get('body', '{}'))
+            headers = event.get('headers') or {}
+            admin_key = (headers.get('X-Admin-Key') or headers.get('x-admin-key') or body.get('key', '')).strip()
             cur.execute("SELECT value FROM admin_settings WHERE key = 'admin_key'")
             row = cur.fetchone()
             if admin_key != (row[0].strip() if row else ''):
@@ -124,7 +128,9 @@ def handler(event: dict, context) -> dict:
 
         # DELETE — удалить отзыв
         if method == 'DELETE':
-            admin_key = (event.get('headers') or {}).get('X-Admin-Key', '').strip()
+            body = json.loads(event.get('body', '{}'))
+            headers = event.get('headers') or {}
+            admin_key = (headers.get('X-Admin-Key') or headers.get('x-admin-key') or body.get('key', '')).strip()
             cur.execute("SELECT value FROM admin_settings WHERE key = 'admin_key'")
             row = cur.fetchone()
             if admin_key != (row[0].strip() if row else ''):
