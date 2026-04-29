@@ -50,8 +50,10 @@ def handler(event: dict, context) -> dict:
 
         # GET /admin — список всех отзывов для модерации
         if method == 'GET' and path.endswith('/admin'):
-            admin_key = (event.get('headers') or {}).get('X-Admin-Key', '')
-            if admin_key != os.environ.get('ADMIN_KEY', ''):
+            admin_key = (event.get('headers') or {}).get('X-Admin-Key', '').strip()
+            stored_key = os.environ.get('ADMIN_KEY', '').strip()
+            print(f"DEBUG admin_key='{admin_key}' stored='{stored_key}' match={admin_key == stored_key}")
+            if admin_key != stored_key:
                 return {'statusCode': 403, 'headers': cors, 'body': json.dumps({'ok': False, 'error': 'Forbidden'})}
             cur.execute(
                 "SELECT id, author_name, event_type, text, rating, is_approved, created_at FROM reviews ORDER BY created_at DESC"
@@ -107,8 +109,8 @@ def handler(event: dict, context) -> dict:
 
         # PUT — одобрить/отклонить отзыв
         if method == 'PUT':
-            admin_key = (event.get('headers') or {}).get('X-Admin-Key', '')
-            if admin_key != os.environ.get('ADMIN_KEY', ''):
+            admin_key = (event.get('headers') or {}).get('X-Admin-Key', '').strip()
+            if admin_key != os.environ.get('ADMIN_KEY', '').strip():
                 return {'statusCode': 403, 'headers': cors, 'body': json.dumps({'ok': False, 'error': 'Forbidden'})}
             body = json.loads(event.get('body', '{}'))
             review_id = int(body.get('id', 0))
@@ -119,8 +121,8 @@ def handler(event: dict, context) -> dict:
 
         # DELETE — удалить отзыв
         if method == 'DELETE':
-            admin_key = (event.get('headers') or {}).get('X-Admin-Key', '')
-            if admin_key != os.environ.get('ADMIN_KEY', ''):
+            admin_key = (event.get('headers') or {}).get('X-Admin-Key', '').strip()
+            if admin_key != os.environ.get('ADMIN_KEY', '').strip():
                 return {'statusCode': 403, 'headers': cors, 'body': json.dumps({'ok': False, 'error': 'Forbidden'})}
             body = json.loads(event.get('body', '{}'))
             review_id = int(body.get('id', 0))
