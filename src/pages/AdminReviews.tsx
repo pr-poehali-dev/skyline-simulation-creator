@@ -20,6 +20,7 @@ const Stars = ({ value }: { value: number }) => (
 export default function AdminReviews() {
   const [key, setKey] = useState(() => sessionStorage.getItem("admin_key") || "");
   const [keyInput, setKeyInput] = useState("");
+  const [showKey, setShowKey] = useState(false);
   const [authed, setAuthed] = useState(false);
   const [authError, setAuthError] = useState(false);
 
@@ -43,6 +44,8 @@ export default function AdminReviews() {
       } else {
         setAuthError(true);
         setAuthed(false);
+        sessionStorage.removeItem("admin_key");
+        setKey("");
       }
     } catch {
       setAuthError(true);
@@ -113,16 +116,26 @@ export default function AdminReviews() {
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
               <label className="text-zinc-400 text-sm mb-1.5 block">Секретный ключ</label>
-              <input
-                type="password"
-                value={keyInput}
-                onChange={(e) => setKeyInput(e.target.value)}
-                placeholder="Введите ключ доступа"
-                autoFocus
-                className="w-full bg-white/5 border border-zinc-700 text-white rounded-lg px-4 py-2.5 text-sm outline-none focus:border-white/40 transition-colors placeholder-zinc-600"
-              />
+              <div className="relative">
+                <input
+                  type={showKey ? "text" : "password"}
+                  value={keyInput}
+                  onChange={(e) => setKeyInput(e.target.value)}
+                  placeholder="Введите ключ доступа"
+                  autoFocus
+                  autoComplete="off"
+                  className="w-full bg-white/5 border border-zinc-700 text-white rounded-lg px-4 py-2.5 pr-10 text-sm outline-none focus:border-white/40 transition-colors placeholder-zinc-600"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowKey((v) => !v)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-white transition-colors"
+                >
+                  <Icon name={showKey ? "EyeOff" : "Eye"} size={16} />
+                </button>
+              </div>
               {authError && (
-                <p className="text-red-400 text-xs mt-1.5">Неверный ключ</p>
+                <p className="text-red-400 text-xs mt-1.5">Неверный ключ — проверьте правильность и попробуйте снова</p>
               )}
             </div>
             <button
