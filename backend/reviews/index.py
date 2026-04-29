@@ -24,6 +24,7 @@ def handler(event: dict, context) -> dict:
 
     method = event.get('httpMethod', 'GET')
     path = event.get('path', '/')
+    print(f"DEBUG method={method} path='{path}' qs={event.get('queryStringParameters')}")
 
     conn = get_conn()
     cur = conn.cursor()
