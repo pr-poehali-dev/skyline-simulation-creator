@@ -30,33 +30,15 @@ def handler(event: dict, context) -> dict:
     cur = conn.cursor()
 
     try:
-        # GET — публичный список одобренных отзывов
-        if method == 'GET' and not path.endswith('/admin'):
-            cur.execute(
-                "SELECT id, author_name, event_type, text, rating, created_at FROM reviews WHERE is_approved = TRUE ORDER BY created_at DESC"
-            )
-            rows = cur.fetchall()
-            reviews = [
-                {
-                    'id': r[0],
-                    'author_name': r[1],
-                    'event_type': r[2],
-                    'text': r[3],
-                    'rating': r[4],
-                    'created_at': r[5].strftime('%d.%m.%Y') if r[5] else '',
-                }
-                for r in rows
-            ]
-            return {'statusCode': 200, 'headers': cors, 'body': json.dumps({'ok': True, 'reviews': reviews}, ensure_ascii=False)}
+        qs = event.get('queryStringParameters') or {}
 
         # GET /admin — список всех отзывов для модерации
-        if method == 'GET' and path.endswith('/admin'):
-            headers = event.get('headers') or {}
-            admin_key = (headers.get('X-Admin-Key') or headers.get('x-admin-key') or event.get('queryStringParameters', {}).get('key', '')).strip()
+        if method == 'GET' and qs.get('admin') == '1':
+            admin_key = qs.get('key', '').strip()
             cur.execute("SELECT value FROM admin_settings WHERE key = 'admin_key'")
             row = cur.fetchone()
             stored_key = row[0].strip() if row else ''
-            print(f"DEBUG key='{admin_key}' stored='{stored_key}' match={admin_key==stored_key} headers={list(headers.keys())}")
+            print(f"DEBUG key='{admin_key}' stored='{stored_key}' match={admin_key==stored_key}")
             if admin_key != stored_key:
                 return {'statusCode': 403, 'headers': cors, 'body': json.dumps({'ok': False, 'error': 'Forbidden'})}
             cur.execute(
@@ -72,6 +54,25 @@ def handler(event: dict, context) -> dict:
                     'rating': r[4],
                     'is_approved': r[5],
                     'created_at': r[6].strftime('%d.%m.%Y %H:%M') if r[6] else '',
+                }
+                for r in rows
+            ]
+            return {'statusCode': 200, 'headers': cors, 'body': json.dumps({'ok': True, 'reviews': reviews}, ensure_ascii=False)}
+
+        # GET — публичный список одобренных отзывов
+        if method == 'GET':
+            cur.execute(
+                "SELECT id, author_name, event_type, text, rating, created_at FROM reviews WHERE is_approved = TRUE ORDER BY created_at DESC"
+            )
+            rows = cur.fetchall()
+            reviews = [
+                {
+                    'id': r[0],
+                    'author_name': r[1],
+                    'event_type': r[2],
+                    'text': r[3],
+                    'rating': r[4],
+                    'created_at': r[5].strftime('%d.%m.%Y') if r[5] else '',
                 }
                 for r in rows
             ]

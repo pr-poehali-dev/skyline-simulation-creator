@@ -32,7 +32,7 @@ export default function AdminReviews() {
   const fetchReviews = useCallback(async (adminKey: string) => {
     setLoading(true);
     try {
-      const res = await fetch(`${REVIEWS_URL}/admin?key=${encodeURIComponent(adminKey)}`);
+      const res = await fetch(`${REVIEWS_URL}?admin=1&key=${encodeURIComponent(adminKey)}`);
       const raw = await res.json();
       const data = typeof raw === "string" ? JSON.parse(raw) : raw;
       if (data.ok) {
